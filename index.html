@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Topics</title>
+<style>
+:root{--bg:#f7f5f0;--card:#fff;--ink:#22252b;--muted:#6b6f78;--line:#e4e0d6;--accent:#2f5d62}
+@media (prefers-color-scheme:dark){:root{--bg:#15171b;--card:#1d2026;--ink:#e8e6e1;--muted:#9aa0a8;--line:#2d3139;--accent:#8cc5c9}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Georgia,"Times New Roman",serif}
+main{max-width:960px;margin:0 auto;padding:3.5rem 1.25rem 4rem}
+h1{font-size:2.8rem;margin:0 0 .3rem;line-height:1.1}.sub{color:var(--muted);font:16px system-ui,sans-serif;margin:0 0 2.2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.1rem}
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.4rem 1.1rem;color:inherit;text-decoration:none;transition:transform .15s,box-shadow .15s,border-color .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:var(--accent)}
+.card h2{margin:0 0 .35rem;font-size:1.35rem}.card p{margin:0 0 1rem;color:var(--muted);font:15px/1.5 system-ui,sans-serif;flex:1}
+.card span{color:var(--accent);font:600 14px system-ui,sans-serif}
+</style><style id="topics-nav-style">
+#topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50}
+#topics-nav .tn-in{max-width:1120px;margin:0 auto;padding:0 1rem;display:flex;align-items:center;gap:.25rem;flex-wrap:wrap;min-height:46px}
+#topics-nav .tn-home{color:#fff;font-weight:700;text-decoration:none;margin-right:.75rem;letter-spacing:.02em}
+#topics-nav a.tn-l{color:#c9d1d9;text-decoration:none;padding:.45rem .7rem;border-radius:6px}
+#topics-nav a.tn-l:hover{background:#30363d;color:#fff}
+#topics-nav a.tn-l[aria-current=page]{background:#fff;color:#1f2328}
+@media (max-width:600px){#topics-nav .tn-in{padding:.4rem .6rem}#topics-nav .tn-home{width:100%;margin:.2rem 0 .1rem .6rem}}
+@media print{#topics-nav{display:none}}
+</style></head><body><nav id="topics-nav" aria-label="Topics pages"><div class="tn-in"><a class="tn-home" href="./" aria-current="page">Topics</a><a class="tn-l" href="Reading-List/">Reading List</a><a class="tn-l" href="List/">Concepts</a><a class="tn-l" href="Ethics/">Ethics</a><a class="tn-l" href="complete-virtue/">Complete Virtue</a><a class="tn-l" href="complete-virtue-axioms/">Axioms</a></div></nav><main><h1>Topics</h1><p class="sub">Notes, frameworks and reading on philosophy and psychology.</p><div class="grid"><a class="card" href="Reading-List/"><h2>Reading List</h2><p>A Wikipedia reading list, grouped by field.</p><span>Open →</span></a><a class="card" href="List/"><h2>Concepts</h2><p>Core concepts in psychology and behavior.</p><span>Open →</span></a><a class="card" href="Ethics/"><h2>Ethics</h2><p>An outline of ethics, from the art of character to living well.</p><span>Open →</span></a><a class="card" href="complete-virtue/"><h2>Complete Virtue</h2><p>The framework for character, in full.</p><span>Open →</span></a><a class="card" href="complete-virtue-axioms/"><h2>Axioms</h2><p>The framework as 30 numbered axioms.</p><span>Open →</span></a></div></main></body></html>
