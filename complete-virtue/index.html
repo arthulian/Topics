@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complete Virtue</title>
+<meta name="description" content="Complete Virtue: a framework for integrity of belief and conduct, emotional regulation, self-concept, and sustainable action.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('topics-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<style>
+:root{--bg:#f6f5f2;--bg-grad:#efece6;--surface:#fff;--surface-2:#faf9f7;--text:#1c1b1f;--muted:#57534e;--border:#e4e0d9;
+--shadow:0 1px 2px rgba(28,25,23,.06),0 2px 8px rgba(28,25,23,.05);--shadow-h:0 6px 20px rgba(28,25,23,.10),0 2px 6px rgba(28,25,23,.06);
+--focus:#2563eb;--radius:14px;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+[data-theme=dark]{--bg:#121216;--bg-grad:#17171d;--surface:#1c1c23;--surface-2:#22222a;--text:#ecebf0;--muted:#a8a6b3;--border:#2f2f3a;--shadow:0 1px 2px rgba(0,0,0,.4);--shadow-h:0 8px 24px rgba(0,0,0,.45);--focus:#93c5fd}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font:16px/1.65 var(--sans);color:var(--text);background:linear-gradient(180deg,var(--bg),var(--bg-grad)) fixed;-webkit-font-smoothing:antialiased}
+a{color:inherit}:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:12px 24px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.bar .back{font-size:14px;color:var(--muted);text-decoration:none}.bar .back:hover{color:var(--text)}
+.bar .sp{flex:1}
+.btn{font:500 13px var(--sans);color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 14px;cursor:pointer;box-shadow:var(--shadow)}
+.btn:hover{box-shadow:var(--shadow-h)}
+.wrap{max-width:1060px;margin:0 auto;padding:48px 24px 80px}
+header.hero{text-align:center;margin-bottom:36px}
+.hero .eyebrow{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font:650 clamp(40px,7vw,64px)/1.05 var(--serif);margin:10px 0 14px;letter-spacing:-.02em}
+.hero p{color:var(--muted);max-width:620px;margin:0 auto}
+nav.toc{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 40px}
+nav.toc a{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:500;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 14px 6px 6px;box-shadow:var(--shadow)}
+nav.toc a:hover{box-shadow:var(--shadow-h)}
+nav.toc .n{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);font-size:12px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden;border-top:4px solid var(--accent)}
+.head{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:14px;padding:20px 24px;cursor:pointer}
+.head:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.head .num{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:10px;color:#fff;background:var(--accent);font:650 18px var(--serif)}
+.head h2{flex:1;margin:0;font:650 clamp(20px,3vw,26px)/1.2 var(--serif)}
+.chev{color:var(--muted);transition:transform .25s}
+.head[aria-expanded=false] .chev{transform:rotate(-90deg)}
+.content{display:grid;grid-template-rows:1fr;transition:grid-template-rows .3s ease}
+.panel.closed .content{grid-template-rows:0fr}
+.content>.grid{overflow:hidden}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;padding:0 24px}
+.panel:not(.closed) .grid{padding-bottom:24px}
+.card{background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px}
+.card h3{margin:0 0 8px;font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+[data-theme=dark] .card h3{filter:brightness(1.35)}
+.card ul,.card ol{margin:0;padding-left:20px}.card li{margin:8px 0}.card li::marker{color:var(--accent)}
+.card ol.loop{list-style:none;padding:0;counter-reset:none}
+.card ol.loop li{display:flex;gap:10px;align-items:flex-start}
+.step{flex:none;display:grid;place-items:center;width:24px;height:24px;margin-top:1px;border-radius:50%;font:600 12px var(--sans);color:#fff;background:var(--accent)}
+.loopnote{font-size:13px;color:var(--muted);margin:6px 0 0 34px}
+.gloss h2{font:650 26px var(--serif);margin:40px 0 14px;text-align:center}
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+th,td{text-align:left;vertical-align:top;padding:14px 18px;border-bottom:1px solid var(--border)}
+tr:last-child th,tr:last-child td{border-bottom:0}
+thead th{background:var(--surface-2);font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+tbody th{font-weight:600;width:32%}
+footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px}
+@media (max-width:600px){.wrap{padding-top:32px}.head{padding:16px}.grid{padding:0 16px;grid-template-columns:1fr}.panel:not(.closed) .grid{padding-bottom:16px}tbody th{width:auto}th,td{display:block;width:100%}tbody th{border-bottom:0;padding-bottom:2px}}
+@media print{.bar,nav.toc{display:none}.panel.closed .content{grid-template-rows:1fr}.panel{break-inside:avoid;box-shadow:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="bar">
+<a class="back" href="../">&larr; Topics</a><span class="sp"></span>
+<button class="btn" id="all">Collapse all</button>
+<button class="btn" id="theme" aria-label="Toggle dark mode">&#9680; Theme</button>
+</div>
+<main class="wrap">
+<header class="hero">
+<div class="eyebrow">A framework for character</div>
+<h1>Complete Virtue</h1>
+</header>
+<nav class="toc" aria-label="Sections">
+<a href="#s1"><span class="n">1</span>Integrity of Belief and Conduct</a>
+<a href="#s2"><span class="n">2</span>Emotional Regulation</a>
+<a href="#s3"><span class="n">3</span>Self-Concept</a>
+<a href="#s4"><span class="n">4</span>Sustainable Action</a>
+<a href="#glossary"><span class="n">&#167;</span>Glossary</a>
+</nav>
+<section class="panel" id="s1" style="--accent:#7c3aed">
+<button class="head" aria-expanded="true"><span class="num">1</span><h2>Integrity of Belief and Conduct</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
+<div class="content"><div class="grid"><article class="card"><h3>Belief Evaluation</h3><ul><li>Test each premise against the intellectual golden rule (an empirically impartial standard applied proportionally to all), ensuring that there is alignment between each inference and objective evidence.</li></ul></article><article class="card"><h3>Conduct Accountability</h3><ul><li>Audit your motives against an impartial standard, applying it to all parties in proportion to what is due to each, honoring its purpose over its letter; then own the consequences of your actions in proportion to your agency.</li></ul></article></div></div></section>
+<section class="panel" id="s2" style="--accent:#0891b2">
+<button class="head" aria-expanded="true"><span class="num">2</span><h2>Emotional Regulation</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
+<div class="content"><div class="grid"><article class="card"><h3>Interoceptive Decentering</h3><ul><li>Treat bodily sensations as physiological data, allowing them to exist in the body (their proper place) without letting your appraisal about them spiral into assumptions driven by unchecked emotions.</li><li>Interpose a personal boundary/space between impulse and action, so that the rational intellect has time to deliberate and judge.</li><li>Recognize defensive compulsions (caused by fear-of-abandonment) as submissive compliance in disguise.</li></ul></article><article class="card"><h3>Acceptance and Recovery</h3><ul><li>Let go of the pretense of invulnerability to recognize that our interdependence demands mutual cooperation</li><li>Treat planned recovery and rest as essential maintenance needed for sustained performance.</li></ul></article><article class="card"><h3>Stress Responses</h3><ul><li>Under acute or overwhelming pressure, set healthy boundaries and disengage. Protecting yourself is not avoidance.</li><li>Under mild or moderate pressure: use controlled exposure techniques to reframe risk as manageable challenge and expand your tolerance window.</li></ul></article></div></div></section>
+<section class="panel" id="s3" style="--accent:#d97706">
+<button class="head" aria-expanded="true"><span class="num">3</span><h2>Self-Concept</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
+<div class="content"><div class="grid"><article class="card"><h3>Self-Worth</h3><ul><li>Your human dignity rests on your capacity for moral excellence; and your disposition toward it is how you honor it.</li><li>Recognize defensive self-sufficiency as counterdependence (posing strength due to fear of vulnerability).</li><li>Develop a growth mindset by viewing setbacks as skill-deficit feedback rather than as personal flaws. Setbacks don't constitute grounds for self-condemnation.</li></ul></article><article class="card"><h3>Self-Confidence Loop</h3><ol class=loop><li><span class="step">A</span> Internalize achievements, stemming from deliberate effort, to build confidence in your capabilities.</li><li><span class="step">B</span> Proportion confidence to your actual level of capability.</li><li><span class="step">C</span> Update confidence when new evidence indicates a change in your capabilities.</li><li><span class="step">D</span> Use your increased confidence to take on progressively more challenging tasks.</li></ol></article></div></div></section>
+<section class="panel" id="s4" style="--accent:#16a34a">
+<button class="head" aria-expanded="true"><span class="num">4</span><h2>Sustainable Action</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
+<div class="content"><div class="grid"><article class="card"><h3>Situational Clarity</h3><ul><li>After forming a mental representation (via your perceptions), pause and use semifactual "even if" simulations to distinguish objective facts from false presuppositions.</li></ul></article><article class="card"><h3>Strategic Focus</h3><ul><li>During cognitive overload, set aside nonessential tasks to refocus on basic needs and prevent future burnout.</li><li>Avoid the illusion of complete control; recognize that some situations are contingent on external forces and are inherently unpredictable.</li><li>Don't become attached to sunk costs or let them influence future decisions.</li></ul></article><article class="card"><h3>Sustainable Perseverance</h3><ul><li>Perseverance is tempered by courage and sustained by the mercy of self-acceptance, so that it can bend without breaking.</li><li>Let your underlying purpose (the why) shape your goals and methods (what and how), without becoming attached to specific outcomes or risking the disappointment of sunk costs.</li><li>Build resilience through gradual, controlled exposure to stressors.</li><li>Remain committed to long-term purpose and values while adapting strategies as needed.</li></ul></article></div></div></section>
+<section class="gloss" id="glossary">
+<h2>Glossary</h2>
+<table><thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead><tbody><tr><th scope="row">Intellectual golden rule</th><td>Hold your own beliefs and claims to the evidence-based standard you would demand of a claim you are motivated to reject.</td></tr><tr><th scope="row">Counterdependence</th><td>Defensive self-sufficiency; strength performed as armor against vulnerability, rather than genuine independence.</td></tr><tr><th scope="row">Semifactual (“even if”) simulation</th><td>Reasoning about what remains objectively true even if a doubtful premise were true; separates fact from presupposition.</td></tr></tbody></table>
+</section>
+<footer><a href="../">Back to Topics</a></footer>
+</main>
+<script>
+const panels=[...document.querySelectorAll('.panel')],allBtn=document.getElementById('all');
+function setP(p,open){p.classList.toggle('closed',!open);p.querySelector('.head').setAttribute('aria-expanded',open)}
+function sync(){allBtn.textContent=panels.every(p=>p.classList.contains('closed'))?'Expand all':'Collapse all'}
+panels.forEach(p=>p.querySelector('.head').addEventListener('click',()=>{setP(p,p.classList.contains('closed'));sync()}));
+allBtn.addEventListener('click',()=>{const open=allBtn.textContent==='Expand all';panels.forEach(p=>setP(p,open));sync()});
+document.querySelectorAll('nav.toc a').forEach(a=>a.addEventListener('click',()=>{const p=document.querySelector(a.getAttribute('href'));if(p&&p.classList.contains('panel'))setP(p,true);sync()}));
+document.getElementById('theme').addEventListener('click',()=>{const d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('topics-theme',n)}catch(e){}});
+</script>
+</body>
+</html>
