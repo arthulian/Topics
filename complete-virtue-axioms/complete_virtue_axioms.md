@@ -1,7 +1,7 @@
 ---
 ---
 
-[Internal Links](https://arthulian.github.io/Topics/) · [Wikipedia](https://arthulian.github.io/Topics/Reading-List/) · [Grokipedia](https://arthulian.github.io/Topics/List/) · [Ethics](https://arthulian.github.io/Topics/Ethics/) · [Complete Virtue](https://arthulian.github.io/Topics/complete-virtue/) · [Axioms](https://arthulian.github.io/Topics/complete-virtue-axioms/)
+[Internal Links](https://arthulian.github.io/Topics/) · [Wikipedia](https://arthulian.github.io/Topics/Reading-List/) · [Grokipedia](https://arthulian.github.io/Topics/List/) · [Ethics](https://arthulian.github.io/Topics/Ethics/) · [Complete Virtue](https://arthulian.github.io/Topics/complete-virtue/)
 
 # Complete Virtue: Axioms
 
