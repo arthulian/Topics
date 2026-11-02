@@ -208,6 +208,106 @@
     .hidden {
       display: none !important;
     }
+
+    /* Per-section collapse/expand, adapted from Reading-List */
+    .controls {
+      display: flex;
+      gap: 8px;
+      margin: 0 0 16px;
+    }
+
+    .btn {
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-main);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .toggle {
+      all: unset;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .toggle:focus-visible {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    .toggle .section-count {
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .chev {
+      width: 22px;
+      height: 22px;
+      flex: none;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--primary) 14%, transparent);
+      transition: transform 0.2s;
+    }
+
+    .chev::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-right: 2px solid var(--primary);
+      border-bottom: 2px solid var(--primary);
+      transform: translateY(-2px) rotate(45deg);
+    }
+
+    .toggle[aria-expanded="false"] .chev {
+      transform: rotate(-90deg);
+    }
+
+    .collapsible[hidden] {
+      display: none;
+    }
+
+    .subsection-title .toggle {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .subsection-title .toggle:hover {
+      color: var(--text-main);
+    }
+
+    .subsection-title .chev {
+      width: 18px;
+      height: 18px;
+      background: transparent;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chev { transition: none; }
+    }
+
+    @media print {
+      .controls { display: none; }
+      .collapsible[hidden] { display: block; }
+    }
   </style>
 <style id="topics-nav-style">
 #topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50}
@@ -230,11 +330,29 @@
       <input type="text" id="searchInput" class="search-input" placeholder="Search concepts, topics, or terms..." />
     </div>
 
+    <div class="controls">
+      <button class="btn" type="button" id="expandAll">Expand all</button>
+      <button class="btn" type="button" id="collapseAll">Collapse all</button>
+    </div>
+
     <!-- Ethics & Value Theory -->
-    <section class="category" data-section="ethics">
-      <h2 class="section-title">Ethics &amp; Value Theory <span class="section-count">5</span></h2>
+    <section class="category" data-section="ethics" id="ethics" aria-labelledby="ethics-h">
+      <h2 class="section-title" id="ethics-h">
+        <button class="toggle" type="button" aria-expanded="true" aria-controls="ethics-body">
+          <span class="chev" aria-hidden="true"></span>
+          <span class="cat-name">Ethics &amp; Value Theory</span>
+          <span class="section-count">5</span>
+        </button>
+      </h2>
+      <div class="collapsible" id="ethics-body">
       <div class="subsection">
-        <h3 class="subsection-title">Moral Agency &amp; Responsibility</h3>
+        <h3 class="subsection-title" id="ethics-moral-agency-and-responsibility-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="ethics-moral-agency-and-responsibility-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Moral Agency &amp; Responsibility</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="ethics-moral-agency-and-responsibility-body">
         <div class="grid">
           <div class="card" data-source="ethics">
             <div>
@@ -258,9 +376,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">Value &amp; the Good</h3>
+        <h3 class="subsection-title" id="ethics-value-and-the-good-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="ethics-value-and-the-good-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Value &amp; the Good</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="ethics-value-and-the-good-body">
         <div class="grid">
           <div class="card" data-source="ethics">
             <div>
@@ -277,14 +402,29 @@
           </div>
 
         </div>
+        </div>
+      </div>
       </div>
     </section>
 
     <!-- Logic & Epistemology -->
-    <section class="category" data-section="logic">
-      <h2 class="section-title">Logic &amp; Epistemology <span class="section-count">3</span></h2>
+    <section class="category" data-section="logic" id="logic" aria-labelledby="logic-h">
+      <h2 class="section-title" id="logic-h">
+        <button class="toggle" type="button" aria-expanded="true" aria-controls="logic-body">
+          <span class="chev" aria-hidden="true"></span>
+          <span class="cat-name">Logic &amp; Epistemology</span>
+          <span class="section-count">3</span>
+        </button>
+      </h2>
+      <div class="collapsible" id="logic-body">
       <div class="subsection">
-        <h3 class="subsection-title">Theories of Truth</h3>
+        <h3 class="subsection-title" id="logic-theories-of-truth-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="logic-theories-of-truth-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Theories of Truth</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="logic-theories-of-truth-body">
         <div class="grid">
           <div class="card" data-source="logic">
             <div>
@@ -294,9 +434,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">Formal Logic</h3>
+        <h3 class="subsection-title" id="logic-formal-logic-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="logic-formal-logic-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Formal Logic</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="logic-formal-logic-body">
         <div class="grid">
           <div class="card" data-source="logic">
             <div>
@@ -313,14 +460,29 @@
           </div>
 
         </div>
+        </div>
+      </div>
       </div>
     </section>
 
     <!-- Metaphysics & Philosophy of Religion -->
-    <section class="category" data-section="metaphysics">
-      <h2 class="section-title">Metaphysics &amp; Philosophy of Religion <span class="section-count">5</span></h2>
+    <section class="category" data-section="metaphysics" id="metaphysics" aria-labelledby="metaphysics-h">
+      <h2 class="section-title" id="metaphysics-h">
+        <button class="toggle" type="button" aria-expanded="true" aria-controls="metaphysics-body">
+          <span class="chev" aria-hidden="true"></span>
+          <span class="cat-name">Metaphysics &amp; Philosophy of Religion</span>
+          <span class="section-count">5</span>
+        </button>
+      </h2>
+      <div class="collapsible" id="metaphysics-body">
       <div class="subsection">
-        <h3 class="subsection-title">Philosophy of Religion &amp; Theology</h3>
+        <h3 class="subsection-title" id="metaphysics-philosophy-of-religion-and-theology-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="metaphysics-philosophy-of-religion-and-theology-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Philosophy of Religion &amp; Theology</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="metaphysics-philosophy-of-religion-and-theology-body">
         <div class="grid">
           <div class="card" data-source="metaphysics">
             <div>
@@ -344,9 +506,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">General Metaphysics</h3>
+        <h3 class="subsection-title" id="metaphysics-general-metaphysics-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="metaphysics-general-metaphysics-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>General Metaphysics</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="metaphysics-general-metaphysics-body">
         <div class="grid">
           <div class="card" data-source="metaphysics">
             <div>
@@ -363,14 +532,29 @@
           </div>
 
         </div>
+        </div>
+      </div>
       </div>
     </section>
 
     <!-- Political & Social Philosophy -->
-    <section class="category" data-section="political">
-      <h2 class="section-title">Political &amp; Social Philosophy <span class="section-count">4</span></h2>
+    <section class="category" data-section="political" id="political" aria-labelledby="political-h">
+      <h2 class="section-title" id="political-h">
+        <button class="toggle" type="button" aria-expanded="true" aria-controls="political-body">
+          <span class="chev" aria-hidden="true"></span>
+          <span class="cat-name">Political &amp; Social Philosophy</span>
+          <span class="section-count">4</span>
+        </button>
+      </h2>
+      <div class="collapsible" id="political-body">
       <div class="subsection">
-        <h3 class="subsection-title">Origins of Political Order</h3>
+        <h3 class="subsection-title" id="political-origins-of-political-order-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="political-origins-of-political-order-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Origins of Political Order</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="political-origins-of-political-order-body">
         <div class="grid">
           <div class="card" data-source="political">
             <div>
@@ -387,9 +571,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">Power, Law &amp; Legitimacy</h3>
+        <h3 class="subsection-title" id="political-power-law-and-legitimacy-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="political-power-law-and-legitimacy-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Power, Law &amp; Legitimacy</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="political-power-law-and-legitimacy-body">
         <div class="grid">
           <div class="card" data-source="political">
             <div>
@@ -406,14 +597,29 @@
           </div>
 
         </div>
+        </div>
+      </div>
       </div>
     </section>
 
     <!-- Psychology & Behavioral Science -->
-    <section class="category" data-section="psychology">
-      <h2 class="section-title">Psychology &amp; Behavioral Science <span class="section-count">17</span></h2>
+    <section class="category" data-section="psychology" id="psychology" aria-labelledby="psychology-h">
+      <h2 class="section-title" id="psychology-h">
+        <button class="toggle" type="button" aria-expanded="true" aria-controls="psychology-body">
+          <span class="chev" aria-hidden="true"></span>
+          <span class="cat-name">Psychology &amp; Behavioral Science</span>
+          <span class="section-count">17</span>
+        </button>
+      </h2>
+      <div class="collapsible" id="psychology-body">
       <div class="subsection">
-        <h3 class="subsection-title">Emotion &amp; Stress</h3>
+        <h3 class="subsection-title" id="psychology-emotion-and-stress-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="psychology-emotion-and-stress-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Emotion &amp; Stress</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="psychology-emotion-and-stress-body">
         <div class="grid">
           <div class="card" data-source="psychology">
             <div>
@@ -458,9 +664,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">Self-Regulation &amp; Personality</h3>
+        <h3 class="subsection-title" id="psychology-self-regulation-and-personality-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="psychology-self-regulation-and-personality-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Self-Regulation &amp; Personality</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="psychology-self-regulation-and-personality-body">
         <div class="grid">
           <div class="card" data-source="psychology">
             <div>
@@ -484,9 +697,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">Relationships &amp; Boundaries</h3>
+        <h3 class="subsection-title" id="psychology-relationships-and-boundaries-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="psychology-relationships-and-boundaries-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Relationships &amp; Boundaries</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="psychology-relationships-and-boundaries-body">
         <div class="grid">
           <div class="card" data-source="psychology">
             <div>
@@ -503,9 +723,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">Body &amp; Nervous System</h3>
+        <h3 class="subsection-title" id="psychology-body-and-nervous-system-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="psychology-body-and-nervous-system-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Body &amp; Nervous System</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="psychology-body-and-nervous-system-body">
         <div class="grid">
           <div class="card" data-source="psychology">
             <div>
@@ -522,9 +749,16 @@
           </div>
 
         </div>
+        </div>
       </div>
       <div class="subsection">
-        <h3 class="subsection-title">Decision-Making</h3>
+        <h3 class="subsection-title" id="psychology-decision-making-h">
+          <button class="toggle" type="button" aria-expanded="true" aria-controls="psychology-decision-making-body">
+            <span class="chev" aria-hidden="true"></span>
+            <span>Decision-Making</span>
+          </button>
+        </h3>
+        <div class="collapsible" id="psychology-decision-making-body">
         <div class="grid">
           <div class="card" data-source="psychology">
             <div>
@@ -555,6 +789,8 @@
           </div>
 
         </div>
+        </div>
+      </div>
       </div>
     </section>
   </div>
@@ -568,9 +804,37 @@
 
     let activeFilter = 'all';
 
+    /* Collapse / expand — per section, same behavior as Reading-List */
+    var toggles = Array.prototype.slice.call(document.querySelectorAll(".toggle"));
+    function setOpen(btn, open) {
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      var body = document.getElementById(btn.getAttribute("aria-controls"));
+      if (body) body.hidden = !open;
+    }
+    toggles.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setOpen(btn, btn.getAttribute("aria-expanded") !== "true");
+      });
+    });
+    document.getElementById("expandAll").addEventListener("click", function () {
+      toggles.forEach(function (b) { setOpen(b, true); });
+    });
+    document.getElementById("collapseAll").addEventListener("click", function () {
+      toggles.forEach(function (b) { setOpen(b, false); });
+    });
+    var savedToggleState = null;
+
     // Search and Filter Handler
     function filterContent() {
       const query = searchInput.value.toLowerCase();
+      var searching = query.trim().length > 0;
+      if (searching && !savedToggleState) {
+        savedToggleState = toggles.map(function (b) { return b.getAttribute("aria-expanded"); });
+        toggles.forEach(function (b) { setOpen(b, true); });
+      } else if (!searching && savedToggleState) {
+        toggles.forEach(function (b, i) { setOpen(b, savedToggleState[i] === "true"); });
+        savedToggleState = null;
+      }
 
       cards.forEach(card => {
         const title = card.querySelector('.card-title').textContent.toLowerCase();
