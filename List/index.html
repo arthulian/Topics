@@ -188,6 +188,23 @@
       font-weight: 600;
     }
 
+    .section-count {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--tag-text);
+      background-color: var(--tag-bg);
+      padding: 1px 8px;
+      border-radius: 10px;
+      vertical-align: middle;
+    }
+
+    .subsection-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin: 14px 0 8px;
+    }
+
     .hidden {
       display: none !important;
     }
@@ -213,100 +230,334 @@
       <input type="text" id="searchInput" class="search-input" placeholder="Search concepts, topics, or terms..." />
     </div>
 
-    <!-- Grokipedia Section -->
-    <h2 class="section-title" data-section="Grokipedia">Grokipedia</h2>
-    <div class="grid" data-section="Grokipedia">
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Codependency">Codependency</a></div>
-          <div class="card-desc">Submission or manipulative caretaking.</div>
-        </div>
-      </div>
+    <!-- Ethics & Value Theory -->
+    <section class="category" data-section="ethics">
+      <h2 class="section-title">Ethics &amp; Value Theory <span class="section-count">5</span></h2>
+      <div class="subsection">
+        <h3 class="subsection-title">Moral Agency &amp; Responsibility</h3>
+        <div class="grid">
+          <div class="card" data-source="ethics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Moral_responsibility">Accountability</a></div>
+              <div class="card-desc">Being answerable for your actions and their consequences. Audit your motives against an impartial standard, applying it to all parties in proportion to what is due to each, honoring its purpose over its letter.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Personal_boundaries">Personal Boundaries</a></div>
-          <div class="card-desc">Staying mindful of your own constraints.</div>
-        </div>
-      </div>
+          <div class="card" data-source="ethics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Bad_faith_(existentialism)">Bad Faith</a></div>
+              <div class="card-desc">Lying to yourself that you had no freedom of choice in order to escape responsibility.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Counterdependency">Counterdependency</a></div>
-          <div class="card-desc">The pretense of invulnerability / defensive self-sufficiency.</div>
-        </div>
-      </div>
+          <div class="card" data-source="ethics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Heteronomy">Heteronomy</a></div>
+              <div class="card-desc">Acting under rules or influences imposed from outside yourself, rather than from your own reasoned will.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Polyvagal_theory">Polyvagal Theory</a></div>
-          <div class="card-desc">Your stress tolerance window.</div>
         </div>
       </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Value &amp; the Good</h3>
+        <div class="grid">
+          <div class="card" data-source="ethics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Instrumental_and_intrinsic_value">Instrumental and Intrinsic Value</a></div>
+              <div class="card-desc">Valued as a means vs. valued for its own sake.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Bad_faith_(existentialism)">Bad Faith</a></div>
-          <div class="card-desc">Lying to yourself that you had no freedom of choice in order to escape responsibility.</div>
-        </div>
-      </div>
+          <div class="card" data-source="ethics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Axiology">Axiology (Value Theory)</a></div>
+              <div class="card-desc">The study of what is good or valuable, and why.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Hormesis">Hormesis</a></div>
-          <div class="card-desc">Mild stress strengthens, acute stress harms.</div>
         </div>
       </div>
+    </section>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Counterfactual_thinking">Counterfactual Thinking</a></div>
-          <div class="card-desc">Simulating "what if" alternatives.</div>
-        </div>
-      </div>
+    <!-- Logic & Epistemology -->
+    <section class="category" data-section="logic">
+      <h2 class="section-title">Logic &amp; Epistemology <span class="section-count">3</span></h2>
+      <div class="subsection">
+        <h3 class="subsection-title">Theories of Truth</h3>
+        <div class="grid">
+          <div class="card" data-source="logic">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Coherence_theory_of_truth">Coherence Theory of Truth</a></div>
+              <div class="card-desc">A belief is true if it fits consistently within a whole system of beliefs.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Decision_fatigue">Decision Fatigue</a></div>
-          <div class="card-desc">Why shedding clutter helps.</div>
         </div>
       </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Formal Logic</h3>
+        <div class="grid">
+          <div class="card" data-source="logic">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/G%C3%B6del%27s_completeness_theorem">Gödel&#39;s Completeness Theorem</a></div>
+              <div class="card-desc">In first-order logic, every logically valid statement can be formally proven.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Exposure_therapy">Exposure Therapy</a></div>
-          <div class="card-desc">Designed to help individuals confront and reduce their fears by gradually exposing them to the objects, situations, activities, or thoughts.</div>
-        </div>
-      </div>
+          <div class="card" data-source="logic">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Law_of_excluded_middle">Law of Excluded Middle</a></div>
+              <div class="card-desc">Every claim is either true or false, with no third option.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Sunk_cost">Sunk Cost</a></div>
-          <div class="card-desc">Unrecoverable costs shouldn't drive future decisions.</div>
         </div>
       </div>
+    </section>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Experiential_avoidance">Experiential Avoidance</a></div>
-          <div class="card-desc">Fear-driven avoidance.</div>
-        </div>
-      </div>
+    <!-- Metaphysics & Philosophy of Religion -->
+    <section class="category" data-section="metaphysics">
+      <h2 class="section-title">Metaphysics &amp; Philosophy of Religion <span class="section-count">5</span></h2>
+      <div class="subsection">
+        <h3 class="subsection-title">Philosophy of Religion &amp; Theology</h3>
+        <div class="grid">
+          <div class="card" data-source="metaphysics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Argument_from_beauty">Argument from Beauty</a></div>
+              <div class="card-desc">Argument for the existence of God.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Resilience_(psychology)">Resilience</a></div>
-          <div class="card-desc">Adaptability.</div>
-        </div>
-      </div>
+          <div class="card" data-source="metaphysics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Molinism">Molinism</a></div>
+              <div class="card-desc">Theological position on God&#39;s middle knowledge.</div>
+            </div>
+          </div>
 
-      <div class="card" data-source="Grokipedia">
-        <div>
-          <div class="card-title"><a href="https://grokipedia.com/page/Grit_(personality_trait)">Grit</a></div>
-          <div class="card-desc">Long-term persistence.</div>
+          <div class="card" data-source="metaphysics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/secondary_causation">Secondary Causation</a></div>
+              <div class="card-desc">The natural world unfolds through its intrinsic potentialities and natural laws, with God as the first cause.</div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+      <div class="subsection">
+        <h3 class="subsection-title">General Metaphysics</h3>
+        <div class="grid">
+          <div class="card" data-source="metaphysics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Teleology">Teleology</a></div>
+              <div class="card-desc">Explaining things by their purpose, goal, or end.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="metaphysics">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Transcendentals">Transcendentals</a></div>
+              <div class="card-desc">Properties shared by everything that exists: the true, the good, and the beautiful.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Political & Social Philosophy -->
+    <section class="category" data-section="political">
+      <h2 class="section-title">Political &amp; Social Philosophy <span class="section-count">4</span></h2>
+      <div class="subsection">
+        <h3 class="subsection-title">Origins of Political Order</h3>
+        <div class="grid">
+          <div class="card" data-source="political">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Social_contract">Social Contract</a></div>
+              <div class="card-desc">Political authority rests on an agreement to accept common rules.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="political">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/State_of_nature">State of Nature</a></div>
+              <div class="card-desc">Human life before any government or society exists.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Power, Law &amp; Legitimacy</h3>
+        <div class="grid">
+          <div class="card" data-source="political">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Might_makes_right">Might Makes Right</a></div>
+              <div class="card-desc">Morality determined by power.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="political">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Rule_of_law">Rule of Law</a></div>
+              <div class="card-desc">No one is above the law.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Psychology & Behavioral Science -->
+    <section class="category" data-section="psychology">
+      <h2 class="section-title">Psychology &amp; Behavioral Science <span class="section-count">17</span></h2>
+      <div class="subsection">
+        <h3 class="subsection-title">Emotion &amp; Stress</h3>
+        <div class="grid">
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Broaden-and-build">Broaden-and-Build</a></div>
+              <div class="card-desc">Theory of positive emotions.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Eustress">Eustress</a></div>
+              <div class="card-desc">Beneficial stress.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Hormesis">Hormesis</a></div>
+              <div class="card-desc">Mild stress strengthens, acute stress harms.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Resilience_(psychology)">Resilience</a></div>
+              <div class="card-desc">Adaptability.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Experiential_avoidance">Experiential Avoidance</a></div>
+              <div class="card-desc">Fear-driven avoidance.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Exposure_therapy">Exposure Therapy</a></div>
+              <div class="card-desc">Designed to help individuals confront and reduce their fears by gradually exposing them to the objects, situations, activities, or thoughts.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Self-Regulation &amp; Personality</h3>
+        <div class="grid">
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Counterdependency">Counterdependency</a></div>
+              <div class="card-desc">The pretense of invulnerability / defensive self-sufficiency.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Grit_(personality_trait)">Grit</a></div>
+              <div class="card-desc">Long-term persistence.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Self-control">Self-Control</a></div>
+              <div class="card-desc">Regulating impulses in pursuit of longer-term goals.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Relationships &amp; Boundaries</h3>
+        <div class="grid">
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Codependency">Codependency</a></div>
+              <div class="card-desc">Submission or manipulative caretaking.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Personal_boundaries">Personal Boundaries</a></div>
+              <div class="card-desc">Staying mindful of your own constraints.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Body &amp; Nervous System</h3>
+        <div class="grid">
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Interoception">Interoception</a></div>
+              <div class="card-desc">Sensing your body&#39;s internal state, such as heartbeat, hunger, or tension.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Polyvagal_theory">Polyvagal Theory</a></div>
+              <div class="card-desc">Your stress tolerance window.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Decision-Making</h3>
+        <div class="grid">
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Behavioral_economics">Behavioral Economics</a></div>
+              <div class="card-desc">How psychological biases shape economic decisions.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Counterfactual_thinking">Counterfactual Thinking</a></div>
+              <div class="card-desc">Simulating "what if" alternatives.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Decision_fatigue">Decision Fatigue</a></div>
+              <div class="card-desc">Why shedding clutter helps.</div>
+            </div>
+          </div>
+
+          <div class="card" data-source="psychology">
+            <div>
+              <div class="card-title"><a href="https://grokipedia.com/page/Sunk_cost">Sunk Cost</a></div>
+              <div class="card-desc">Unrecoverable costs shouldn't drive future decisions.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
 
   <script>
     const searchInput = document.getElementById('searchInput');
@@ -336,15 +587,10 @@
         }
       });
 
-      // Hide empty section headers
-      sections.forEach(sec => {
-        const secName = sec.getAttribute('data-section');
-        const visibleCards = document.querySelectorAll(`.card[data-source="${secName}"]:not(.hidden)`);
-        if (visibleCards.length === 0) {
-          sec.classList.add('hidden');
-        } else {
-          sec.classList.remove('hidden');
-        }
+      // Hide empty sections and sub-sections
+      document.querySelectorAll('.subsection, .category').forEach(sec => {
+        const visibleCards = sec.querySelectorAll('.card:not(.hidden)');
+        sec.classList.toggle('hidden', visibleCards.length === 0);
       });
     }
 
