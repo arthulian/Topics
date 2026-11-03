@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ethics</title>
+<script>try{var t=localStorage.getItem('topics-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}</script>
 <style>
   :root { color-scheme: dark; }
   html { scroll-behavior: smooth; }
@@ -22,9 +23,36 @@
   ul { padding-left:24px; }
   li p { margin:4px 0; }
   .top { display:inline-block; margin-top:8px; font-size:.9rem; }
+  .sec-title { cursor:pointer; user-select:none; }
+  .sec-title .chev { display:inline-block; transition:transform .2s; color:#8ab4f8; }
+  .sec.collapsed .chev { transform:rotate(-90deg); }
+  .sec.collapsed .sec-body { display:none; }
+  section.sec { scroll-margin-top:16px; }
+</style>
+<style id="topics-nav-style">
+#topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50;border:0;border-radius:0;padding:0}
+#topics-nav .tn-in{max-width:1120px;margin:0 auto;padding:0 1rem;display:flex;align-items:center;gap:.25rem;flex-wrap:wrap;min-height:46px}
+#topics-nav .tn-home{color:#fff;font-weight:700;text-decoration:none;margin-right:.75rem;letter-spacing:.02em}
+#topics-nav a.tn-l{color:#c9d1d9;text-decoration:none;padding:.45rem .7rem;border-radius:6px}
+#topics-nav a.tn-l:hover{background:#30363d;color:#fff;text-decoration:none}
+#topics-nav a:hover{text-decoration:none}
+#topics-nav a.tn-l[aria-current=page]{background:#fff;color:#1f2328}
+.theme-btn{margin-left:auto;background:transparent;color:#c9d1d9;border:1px solid #444c56;border-radius:8px;padding:.4rem .75rem;font:500 14px system-ui,sans-serif;cursor:pointer}
+.theme-btn:hover{background:#30363d;color:#fff}
+@media (max-width:600px){#topics-nav .tn-in{padding:.4rem .6rem}#topics-nav .tn-home{width:100%;margin:.3rem 0 1.6rem .6rem;padding:.35rem 0}}
+@media print{#topics-nav{display:none}}
+[data-theme=light]{color-scheme:light}
+[data-theme=light] body{background:#f7f5f0;color:#22252b}
+[data-theme=light] h1,[data-theme=light] h2{color:#1c1b1f}
+[data-theme=light] h2{border-top-color:#e4e0d6}
+[data-theme=light] h3{color:#22252b}
+[data-theme=light] a{color:#1a56c4}
+[data-theme=light] main nav{background:#fff;border-color:#e4e0d6}
+[data-theme=light] .sec-title .chev{color:#1a56c4}
 </style>
 </head>
 <body>
+<nav id="topics-nav" aria-label="Internal Links pages"><div class="tn-in"><a class="tn-home" href="../index.html">Internal Links</a><a class="tn-l" href="../Reading-List/index.html">Wikipedia</a><a class="tn-l" href="../List/index.html">Grokipedia</a><a class="tn-l" href="../Ethics/index.html">Ethics</a><a class="tn-l" href="index.html" aria-current="page">Ethics Outline</a><a class="tn-l" href="../complete-virtue/index.html">Complete Virtue</a><button class="theme-btn" id="theme" aria-label="Toggle dark mode">&#9680; Theme</button></div></nav>
 <main>
 <h1 id="ethics">Ethics</h1>
 <nav aria-label="Table of contents">
@@ -73,7 +101,9 @@
 </li>
 </ol>
 </nav>
-<h2 id="1-the-art-of-character">1. The Art of Character</h2>
+<section class="sec" id="1-the-art-of-character">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 1. The Art of Character</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Ethics is a craft that is learned through practice, not just through reading books.</strong></p>
@@ -104,8 +134,11 @@
 <li><p>The best approach combines the development of good character with respect for good rules.</p></li>
 </ul></li>
 </ul>
-
-<h2 id="2-the-foundations-of-ancient-ethics">2. The Foundations of Ancient Ethics</h2>
+</div>
+</section>
+<section class="sec" id="2-the-foundations-of-ancient-ethics">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 2. The Foundations of Ancient Ethics</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Socrates shifted philosophical attention toward how people should live.</strong></p>
@@ -141,8 +174,11 @@
 </ul></li>
 </ul></li>
 </ul>
-
-<h2 id="3-responsibility-choice-and-happiness">3. Responsibility, Choice, and Happiness</h2>
+</div>
+</section>
+<section class="sec" id="3-responsibility-choice-and-happiness">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 3. Responsibility, Choice, and Happiness</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Responsibility is the starting point for Aristotle's understanding of ethics.</strong></p>
@@ -187,8 +223,11 @@
 <li><p>The Stoic ideal of a life that flows smoothly.</p></li>
 </ul></li>
 </ul>
-
-<h2 id="4-virtue-developing-good-character">4. Virtue: Developing Good Character</h2>
+</div>
+</section>
+<section class="sec" id="4-virtue-developing-good-character">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 4. Virtue: Developing Good Character</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Virtue is a stable, acquired disposition.</strong></p>
@@ -309,8 +348,11 @@
 </ul></li>
 </ul></li>
 </ul>
-
-<h2 id="5-vices-sin-and-humility">5. Vices, Sin, and Humility</h2>
+</div>
+</section>
+<section class="sec" id="5-vices-sin-and-humility">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 5. Vices, Sin, and Humility</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Vices are the opposites of virtues.</strong></p></li>
@@ -339,8 +381,11 @@
 </ul></li>
 </ul></li>
 </ul>
-
-<h2 id="6-virtues-in-relationships-with-other-people">6. Virtues in Relationships with Other People</h2>
+</div>
+</section>
+<section class="sec" id="6-virtues-in-relationships-with-other-people">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 6. Virtues in Relationships with Other People</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Social interactions require their own virtues, which also involve finding a mean.</strong></p>
@@ -399,8 +444,11 @@
 <li><p>Regardless of whether loyalty is local or global, the classical virtues remain essential.</p></li>
 </ul></li>
 </ul>
-
-<h2 id="7-natural-law-human-rights-and-universal-morality">7. Natural Law, Human Rights, and Universal Morality</h2>
+</div>
+</section>
+<section class="sec" id="7-natural-law-human-rights-and-universal-morality">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 7. Natural Law, Human Rights, and Universal Morality</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Natural law represents the search for universal moral standards.</strong></p>
@@ -444,8 +492,11 @@
 <li><p>Both versions have limitations.</p></li>
 </ul></li>
 </ul>
-
-<h2 id="8-competing-modern-ethical-theories">8. Competing Modern Ethical Theories</h2>
+</div>
+</section>
+<section class="sec" id="8-competing-modern-ethical-theories">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 8. Competing Modern Ethical Theories</h2>
+<div class="sec-body">
 
 <h3 id="81-kantian-ethics-duty-and-universal-rules">8.1 Kantian Ethics: Duty and Universal Rules</h3>
 
@@ -512,8 +563,11 @@
 </ul></li>
 </ul></li>
 </ul>
-
-<h2 id="9-care-ethics-and-dependence">9. Care Ethics and Dependence</h2>
+</div>
+</section>
+<section class="sec" id="9-care-ethics-and-dependence">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 9. Care Ethics and Dependence</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Ethics must account for people who cannot always function as independent adults.</strong></p>
@@ -535,8 +589,11 @@
 <li><p>Ethical responsibility includes caring for people who depend on others.</p></li>
 </ul></li>
 </ul>
-
-<h2 id="10-ethics-in-medicine">10. Ethics in Medicine</h2>
+</div>
+</section>
+<section class="sec" id="10-ethics-in-medicine">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 10. Ethics in Medicine</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>The Hippocratic tradition provides four foundational medical ethics principles.</strong></p>
@@ -555,8 +612,11 @@
 <li><p>These situations create difficult decisions about autonomy, doing good, and justice.</p></li>
 </ul></li>
 </ul>
-
-<h2 id="11-ethics-in-the-workplace">11. Ethics in the Workplace</h2>
+</div>
+</section>
+<section class="sec" id="11-ethics-in-the-workplace">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 11. Ethics in the Workplace</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>Ethics applies to every professional role.</strong></p>
@@ -582,8 +642,11 @@
 <li>People who expose unethical conduct should receive protection.</li>
 </ul></li>
 </ul>
-
-<h2 id="12-expanding-the-circle-of-moral-concern">12. Expanding the Circle of Moral Concern</h2>
+</div>
+</section>
+<section class="sec" id="12-expanding-the-circle-of-moral-concern">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 12. Expanding the Circle of Moral Concern</h2>
+<div class="sec-body">
 
 <h3 id="121-animal-ethics">12.1 Animal Ethics</h3>
 
@@ -628,8 +691,11 @@
 <li><p>A proper orientation toward nature.</p></li>
 </ul></li>
 </ul>
-
-<h2 id="13-the-liberal-arts-and-the-art-of-living-well">13. The Liberal Arts and the Art of Living Well</h2>
+</div>
+</section>
+<section class="sec" id="13-the-liberal-arts-and-the-art-of-living-well">
+<h2 class="sec-title" role="button" tabindex="0" aria-expanded="true"><span class="chev" aria-hidden="true">▾</span> 13. The Liberal Arts and the Art of Living Well</h2>
+<div class="sec-body">
 
 <ul>
 <li><p><strong>The liberal arts connect education with the ability to live well.</strong></p>
@@ -646,8 +712,42 @@
 <li><p>Living well is an ongoing process of deliberately crafting one's character.</p></li>
 </ul></li>
 </ul>
-
+</div>
+</section>
 <p><a class="top" href="#ethics">↑ Back to top</a></p>
 </main>
+<script>
+(function(){
+  function setOpen(sec, open){
+    sec.classList.toggle('collapsed', !open);
+    sec.querySelector('.sec-title').setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  document.querySelectorAll('.sec-title').forEach(function(t){
+    var sec = t.parentElement;
+    t.addEventListener('click', function(){ setOpen(sec, sec.classList.contains('collapsed')); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
+    });
+  });
+  function openTarget(){
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    var sec = el.closest('.sec');
+    if (sec) setOpen(sec, true);
+  }
+  window.addEventListener('hashchange', openTarget);
+  document.querySelectorAll('.toc a').forEach(function(a){
+    a.addEventListener('click', function(){
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      var sec = el && el.closest('.sec');
+      if (sec) setOpen(sec, true);
+    });
+  });
+  openTarget();
+})();
+</script>
+<script>document.getElementById('theme').addEventListener('click',()=>{const d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('topics-theme',n)}catch(e){}});</script>
 </body>
 </html>
