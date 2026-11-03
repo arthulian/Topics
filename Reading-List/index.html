@@ -40,14 +40,7 @@ a{color:inherit}
 .topbar-inner{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;gap:12px;align-items:center}
 .brand{font-family:var(--serif);font-weight:700;font-size:1.35rem;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
 .brand span{color:var(--muted);font-family:var(--sans);font-weight:500;font-size:.8rem;margin-left:6px}
-.search{flex:1;position:relative;max-width:520px;margin-left:auto}
-.search input{width:100%;font:inherit;font-size:.95rem;padding:9px 34px 9px 36px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
-.search input::placeholder{color:var(--muted)}
-.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);pointer-events:none}
-.search .clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);font-size:1.1rem;width:28px;height:28px;border-radius:50%;cursor:pointer;display:none}
-.search .clear:hover{background:var(--surface-2);color:var(--text)}
-.search.has-value .clear{display:block}
-.icon-btn{border:1px solid var(--border);background:var(--surface);color:var(--text);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);flex:none;transition:transform .15s,box-shadow .15s}
+.icon-btn{margin-left:auto;border:1px solid var(--border);background:var(--surface);color:var(--text);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);flex:none;transition:transform .15s,box-shadow .15s}
 .icon-btn:hover{box-shadow:var(--shadow-h);transform:translateY(-1px)}
 .icon-btn svg{width:18px;height:18px}
 [data-theme="dark"] .i-moon,[data-theme="light"] .i-sun{display:none}
@@ -110,11 +103,6 @@ main{min-width:0}
 .card:hover .card-ext{transform:translate(2px,-2px)}
 .card-desc{margin:6px 0 0;color:var(--muted);font-size:.9rem;line-height:1.5}
 .card-meta{margin:8px 0 0;font-size:.74rem;color:var(--muted);opacity:.85;font-style:italic}
-mark{background:color-mix(in srgb,#facc15 45%,transparent);color:inherit;border-radius:3px;padding:0 1px}
-
-.no-results{display:none;text-align:center;padding:48px 20px;background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius);color:var(--muted)}
-.no-results.show{display:block}
-.no-results strong{display:block;font-family:var(--serif);font-size:1.3rem;color:var(--text);margin-bottom:4px}
 footer{grid-column:1/-1;color:var(--muted);font-size:.85rem;text-align:center;padding-top:8px}
 footer a{color:var(--text)}
 
@@ -200,12 +188,6 @@ footer a{color:var(--text)}
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#top">Topics<span>a reading list</span></a>
-    <div class="search" id="searchWrap" role="search">
-      <label for="q" class="visually-hidden">Search articles</label>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Search articles…" autocomplete="off" aria-describedby="resultStatus">
-      <button class="clear" type="button" id="clearQ" aria-label="Clear search">×</button>
-    </div>
     <button class="icon-btn" type="button" id="themeBtn" aria-label="Switch to dark theme" title="Toggle light/dark theme">
       <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -235,7 +217,6 @@ footer a{color:var(--text)}
   </nav>
 
   <main id="content" tabindex="-1">
-    <p id="resultStatus" class="visually-hidden" aria-live="polite"></p>
     <section class="cvs" id="cv-search" aria-labelledby="cv-search-h">
       <div class="cvs-head">
         <h2 id="cv-search-h">Search Complete Virtue's linked articles</h2>
@@ -286,7 +267,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="ethics-moral-agency-responsibility-body"><ul class="cards" role="list">
-          <li class="card" data-search="accountability owning the consequences of your actions proportionally to your agency, by auditing your motives against an empirically impartial standard proportionally applied to all. moral responsibility">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Moral_responsibility" target="_blank" rel="noopener">
               <span class="card-title">Accountability</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -294,7 +275,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Rendering to each and all what is due to them (their moral and legal rights) in proportion to their agency. Equity (epieikeia) covers irregular cases so that the ordinance is framed to fit the circumstances.</p>
             <p class="card-meta">Wikipedia: Moral responsibility</p>
           </li>
-          <li class="card" data-search="bad faith lying to yourself that you had no freedom of choice in order to escape responsibility. bad faith (existentialism)">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Bad_faith_(existentialism)" target="_blank" rel="noopener">
               <span class="card-title">Bad faith</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -302,7 +283,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Lying to yourself that you had no freedom of choice in order to escape responsibility.</p>
             <p class="card-meta">Wikipedia: Bad faith (existentialism)</p>
           </li>
-          <li class="card" data-search="heteronomy acting under rules or influences imposed from outside yourself, rather than from your own reasoned will. heteronomy">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Heteronomy" target="_blank" rel="noopener">
               <span class="card-title">Heteronomy</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -320,7 +301,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="ethics-value-the-good-body"><ul class="cards" role="list">
-          <li class="card" data-search="instrumental and intrinsic value the distinction between things valued as a means to something else and things valued for their own sake. instrumental and intrinsic value">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Instrumental_and_intrinsic_value" target="_blank" rel="noopener">
               <span class="card-title">Instrumental and intrinsic value</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -328,7 +309,7 @@ footer a{color:var(--text)}
             <p class="card-desc">The distinction between things valued as a means to something else and things valued for their own sake.</p>
             
           </li>
-          <li class="card" data-search="value theory the study of what is good or valuable, and why. value theory">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Value_theory" target="_blank" rel="noopener">
               <span class="card-title">Value theory</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -359,7 +340,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="logic-theories-of-truth-body"><ul class="cards" role="list">
-          <li class="card" data-search="coherence theory of truth view that a belief is true if it fits consistently within a whole system of beliefs. coherence theory of truth">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Coherence_theory_of_truth" target="_blank" rel="noopener">
               <span class="card-title">Coherence theory of truth</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -377,7 +358,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="logic-formal-logic-body"><ul class="cards" role="list">
-          <li class="card" data-search="gödel&#x27;s completeness theorem theorem showing that in first-order logic, every logically valid statement can be formally proven. gödel&#x27;s completeness theorem">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_completeness_theorem" target="_blank" rel="noopener">
               <span class="card-title">Gödel&#x27;s completeness theorem</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -385,7 +366,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Theorem showing that in first-order logic, every logically valid statement can be formally proven.</p>
             
           </li>
-          <li class="card" data-search="law of excluded middle logical principle that posits that every claim is either true or false, with no third option. law of excluded middle">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Law_of_excluded_middle" target="_blank" rel="noopener">
               <span class="card-title">Law of excluded middle</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -416,7 +397,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="metaphysics-philosophy-of-religion-theology-body"><ul class="cards" role="list">
-          <li class="card" data-search="argument from beauty argument for the existence of god. argument from beauty">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Argument_from_beauty" target="_blank" rel="noopener">
               <span class="card-title">Argument from beauty</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -424,7 +405,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Argument for the existence of God.</p>
             
           </li>
-          <li class="card" data-search="molinism theological position on god&#x27;s middle knowledge. molinism">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Molinism" target="_blank" rel="noopener">
               <span class="card-title">Molinism</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -432,7 +413,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Theological position on God&#x27;s middle knowledge.</p>
             
           </li>
-          <li class="card" data-search="secondary causation the natural world unfolds through its intrinsic potentialities and natural laws, with god as the first cause. secondary causation">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Secondary_causation" target="_blank" rel="noopener">
               <span class="card-title">Secondary causation</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -450,7 +431,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="metaphysics-general-metaphysics-body"><ul class="cards" role="list">
-          <li class="card" data-search="teleology explaining things by their purpose, goal, or end. teleology">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Teleology" target="_blank" rel="noopener">
               <span class="card-title">Teleology</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -458,7 +439,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Explaining things by their purpose, goal, or end.</p>
             
           </li>
-          <li class="card" data-search="transcendentals properties of being shared by everything that exists, traditionally the true, the good, and the beautiful. transcendentals">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Transcendentals" target="_blank" rel="noopener">
               <span class="card-title">Transcendentals</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -489,7 +470,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="political-origins-of-political-order-body"><ul class="cards" role="list">
-          <li class="card" data-search="social contract theory that political authority rests on an agreement among individuals to accept common rules. social contract">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Social_contract" target="_blank" rel="noopener">
               <span class="card-title">Social contract</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -497,7 +478,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Theory that political authority rests on an agreement among individuals to accept common rules.</p>
             
           </li>
-          <li class="card" data-search="state of nature the hypothetical condition of human life before any government or society exists. state of nature">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/State_of_nature" target="_blank" rel="noopener">
               <span class="card-title">State of nature</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -515,7 +496,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="political-power-law-legitimacy-body"><ul class="cards" role="list">
-          <li class="card" data-search="might makes right view that morality is, or ought to be, determined by power. might makes right">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Might_makes_right" target="_blank" rel="noopener">
               <span class="card-title">Might makes right</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -523,7 +504,7 @@ footer a{color:var(--text)}
             <p class="card-desc">View that morality is, or ought to be, determined by power.</p>
             
           </li>
-          <li class="card" data-search="rule of law the principle that all people are subject to and accountable to the same laws, with no one being above them. rule of law">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Rule_of_law" target="_blank" rel="noopener">
               <span class="card-title">Rule of law</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -554,7 +535,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="psychology-emotion-stress-body"><ul class="cards" role="list">
-          <li class="card" data-search="broaden-and-build theory of positive emotions. broaden-and-build">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Broaden-and-build" target="_blank" rel="noopener">
               <span class="card-title">Broaden-and-build</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -562,7 +543,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Theory of positive emotions.</p>
             
           </li>
-          <li class="card" data-search="eustress beneficial stress. eustress">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Eustress" target="_blank" rel="noopener">
               <span class="card-title">Eustress</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -580,7 +561,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="psychology-self-regulation-personality-body"><ul class="cards" role="list">
-          <li class="card" data-search="counterdependency defensive refusal to rely on others, often masking a fear of closeness or dependence. counterdependency">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Counterdependency" target="_blank" rel="noopener">
               <span class="card-title">Counterdependency</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -588,7 +569,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Defensive refusal to rely on others, often masking a fear of closeness or dependence.</p>
             
           </li>
-          <li class="card" data-search="grit perseverance and passion toward long-term goals. grit (personality trait)">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Grit_(personality_trait)" target="_blank" rel="noopener">
               <span class="card-title">Grit</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -596,7 +577,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Perseverance and passion toward long-term goals.</p>
             <p class="card-meta">Wikipedia: Grit (personality trait)</p>
           </li>
-          <li class="card" data-search="self-control the ability to regulate impulses, emotions, and behavior in pursuit of longer-term goals. self-control">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Self-control" target="_blank" rel="noopener">
               <span class="card-title">Self-control</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -614,7 +595,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="psychology-body-nervous-system-body"><ul class="cards" role="list">
-          <li class="card" data-search="interoception sensing the internal state of your own body, such as heartbeat, hunger, or tension. interoception">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Interoception" target="_blank" rel="noopener">
               <span class="card-title">Interoception</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -622,7 +603,7 @@ footer a{color:var(--text)}
             <p class="card-desc">Sensing the internal state of your own body, such as heartbeat, hunger, or tension.</p>
             
           </li>
-          <li class="card" data-search="polyvagal theory theory of how the autonomic nervous system shifts between states of safety, mobilization, and shutdown. polyvagal theory">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Polyvagal_theory" target="_blank" rel="noopener">
               <span class="card-title">Polyvagal theory</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -640,7 +621,7 @@ footer a{color:var(--text)}
           </button>
         </h3>
         <div class="collapsible" id="psychology-decision-making-body"><ul class="cards" role="list">
-          <li class="card" data-search="behavioral economics study of how psychological factors and biases shape people&#x27;s economic decisions. behavioral economics">
+          <li class="card">
             <a class="card-link" href="https://en.wikipedia.org/wiki/Behavioral_economics" target="_blank" rel="noopener">
               <span class="card-title">Behavioral economics</span>
               <span class="card-ext" aria-hidden="true">↗</span>
@@ -652,10 +633,6 @@ footer a{color:var(--text)}
       </section>
       </div>
     </section>
-    <div class="no-results" id="noResults" role="status">
-      <strong>No results</strong>
-      No articles match “<span id="noResultsQ"></span>”. Try a different word.
-    </div>
   </main>
 
   <footer>Article text and titles from <a href="https://en.wikipedia.org/" target="_blank" rel="noopener">Wikipedia</a>, the free encyclopedia.</footer>
@@ -718,56 +695,6 @@ footer a{color:var(--text)}
     },{rootMargin:"-80px 0px -55% 0px",threshold:0});
     cats.forEach(function(c){io.observe(c);});
   }
-
-  /* Search */
-  var q=document.getElementById("q"),wrap=document.getElementById("searchWrap");
-  var cards=Array.prototype.slice.call(document.querySelectorAll(".card"));
-  var subs=Array.prototype.slice.call(document.querySelectorAll(".sub"));
-  var status=document.getElementById("resultStatus"),noRes=document.getElementById("noResults"),noResQ=document.getElementById("noResultsQ");
-  var originals=cards.map(function(c){return{t:c.querySelector(".card-title"),d:c.querySelector(".card-desc"),th:c.querySelector(".card-title").textContent,dh:c.querySelector(".card-desc").textContent};});
-  function esc(s){return s.replace(/[&<>"']/g,function(ch){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});}
-  function highlight(text,terms){
-    if(!terms.length)return esc(text);
-    var re=new RegExp("("+terms.map(function(t){return t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}).join("|")+")","gi");
-    return text.split(re).map(function(part,i){return i%2?"<mark>"+esc(part)+"</mark>":esc(part);}).join("");
-  }
-  var saved=null;
-  function apply(){
-    var raw=q.value.trim().toLowerCase();
-    wrap.classList.toggle("has-value",q.value.length>0);
-    var terms=raw?raw.split(/\s+/):[];
-    if(terms.length&&!saved){saved=toggles.map(function(b){return b.getAttribute("aria-expanded");});toggles.forEach(function(b){setOpen(b,true);});}
-    else if(!terms.length&&saved){toggles.forEach(function(b,i){setOpen(b,saved[i]==="true");});saved=null;}
-    var shown=0;
-    cards.forEach(function(c,i){
-      var hay=c.getAttribute("data-search");
-      var ok=terms.every(function(t){return hay.indexOf(t)!==-1;});
-      c.hidden=!ok;if(ok)shown++;
-      originals[i].t.innerHTML=highlight(originals[i].th,terms);
-      originals[i].d.innerHTML=highlight(originals[i].dh,terms);
-    });
-    subs.forEach(function(s){
-      var n=s.querySelectorAll(".card:not([hidden])").length;
-      s.hidden=n===0;
-      var cnt=s.querySelector(".count");cnt.textContent=terms.length?n+" / "+cnt.getAttribute("data-total"):cnt.getAttribute("data-total");
-    });
-    cats.forEach(function(c){
-      var n=c.querySelectorAll(".card:not([hidden])").length;
-      c.hidden=n===0;
-      var cnt=c.querySelector(".cat-head .count");cnt.textContent=terms.length?n+" / "+cnt.getAttribute("data-total"):cnt.getAttribute("data-total");
-      var nc=document.querySelector('[data-count-for="'+c.id+'"]');
-      if(nc){nc.textContent=n;nc.parentNode.classList.toggle("empty",n===0);}
-    });
-    noRes.classList.toggle("show",shown===0);
-    noResQ.textContent=q.value.trim();
-    status.textContent=terms.length?(shown+" article"+(shown===1?"":"s")+" found"):"";
-  }
-  q.addEventListener("input",apply);
-  q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";apply();}});
-  document.getElementById("clearQ").addEventListener("click",function(){q.value="";apply();q.focus();});
-  document.addEventListener("keydown",function(e){
-    if(e.key==="/"&&document.activeElement!==q&&!/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){e.preventDefault();q.focus();}
-  });
 })();
 </script>
 <script>
