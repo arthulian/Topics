@@ -28,6 +28,9 @@
   .sec.collapsed .chev { transform:rotate(-90deg); }
   .sec.collapsed .sec-body { display:none; }
   section.sec { scroll-margin-top:16px; }
+  .header-actions { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+  .global-collapse-btn { background: transparent; color: #8ab4f8; border: 1px solid #2c2c2c; border-radius: 6px; padding: 6px 12px; font: inherit; font-size: 0.9rem; cursor: pointer; }
+  .global-collapse-btn:hover { background: #1c1c1c; text-decoration: underline; }
 </style>
 <style id="topics-nav-style">
 #topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50;border:0;border-radius:0;padding:0}
@@ -49,11 +52,16 @@
 [data-theme=light] a{color:#1a56c4}
 [data-theme=light] main nav{background:#fff;border-color:#e4e0d6}
 [data-theme=light] .sec-title .chev{color:#1a56c4}
+[data-theme=light] .global-collapse-btn { border-color: #e4e0d6; color: #1a56c4; }
+[data-theme=light] .global-collapse-btn:hover { background: #fff; }
 </style>
 </head>
 <body>
 <nav id="topics-nav" aria-label="Internal Links pages"><div class="tn-in"><a class="tn-home" href="../index.html">Internal Links</a><a class="tn-l" href="../Reading-List/index.html">Wikipedia</a><a class="tn-l" href="../List/index.html">Grokipedia</a><a class="tn-l" href="index.html" aria-current="page">Ethics Outline</a><a class="tn-l" href="../complete-virtue/index.html">Complete Virtue</a><button class="theme-btn" id="theme" aria-label="Toggle dark mode">&#9680; Theme</button></div></nav>
 <main>
+<div class="header-actions">
+  <button id="global-collapse" class="global-collapse-btn" aria-expanded="true">Collapse All Sections</button>
+</div>
 <h1 id="ethics">Ethics</h1>
 <nav aria-label="Table of contents">
 <h2>Table of Contents</h2>
@@ -746,6 +754,20 @@
     });
   });
   openTarget();
+
+  // Global collapse / uncollapse functionality
+  var globalBtn = document.getElementById('global-collapse');
+  if (globalBtn) {
+    globalBtn.addEventListener('click', function(){
+      var sections = document.querySelectorAll('section.sec');
+      var isExpanded = globalBtn.getAttribute('aria-expanded') === 'true';
+      sections.forEach(function(sec){
+        setOpen(sec, !isExpanded);
+      });
+      globalBtn.setAttribute('aria-expanded', !isExpanded);
+      globalBtn.textContent = isExpanded ? 'Uncollapse All Sections' : 'Collapse All Sections';
+    });
+  }
 })();
 </script>
 <script>document.getElementById('theme').addEventListener('click',()=>{const d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('topics-theme',n)}catch(e){}});</script>
