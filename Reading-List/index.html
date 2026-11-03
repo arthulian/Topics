@@ -16,7 +16,7 @@
 :root{
   --bg:#f6f5f2;--bg-grad:#efece6;--surface:#ffffff;--surface-2:#faf9f7;--text:#1c1b1f;--muted:#57534e;--border:#e4e0d9;
   --shadow:0 1px 2px rgba(28,25,23,.06),0 2px 8px rgba(28,25,23,.05);--shadow-h:0 6px 20px rgba(28,25,23,.10),0 2px 6px rgba(28,25,23,.06);
-  --focus:#2563eb;--radius:14px;--nav-w:270px;
+  --focus:#2563eb;--radius:14px;
   --serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 [data-theme="dark"]{
@@ -46,7 +46,7 @@ a{color:inherit}
 [data-theme="dark"] .i-moon,[data-theme="light"] .i-sun{display:none}
 
 /* Layout */
-.layout{max-width:1200px;margin:0 auto;padding:0 20px 64px;display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:36px}
+.layout{max-width:1200px;margin:0 auto;padding:0 20px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:36px}
 .hero{grid-column:1/-1;padding:44px 0 8px}
 .hero h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.05;margin:0 0 10px;letter-spacing:-.02em}
 .hero p{margin:0;color:var(--muted);max-width:60ch;font-size:1.05rem}
@@ -54,8 +54,7 @@ a{color:inherit}
 .pill{font-size:.8rem;font-weight:600;padding:4px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--muted)}
 
 /* Section controls */
-.nav{align-self:start;padding:4px 2px}
-.controls{display:flex;gap:8px;margin:0 10px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
 .btn{font:inherit;font-size:.82rem;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;box-shadow:var(--shadow);transition:box-shadow .15s,transform .15s}
 .btn:hover{box-shadow:var(--shadow-h);transform:translateY(-1px)}
 
@@ -101,7 +100,6 @@ footer a{color:var(--text)}
 @media (max-width:900px){
   .layout{grid-template-columns:minmax(0,1fr);gap:16px}
   .hero{padding-top:28px}
-  .controls{margin:8px 0 0}
 }
 @media (max-width:560px){
   .topbar-inner{padding:10px 14px;gap:8px}
@@ -113,7 +111,7 @@ footer a{color:var(--text)}
   .cat-name{font-size:1.2rem}
   .cards{grid-template-columns:1fr}
 }
-@media print{.topbar,.nav,.controls{display:none}.layout{display:block}.collapsible[hidden]{display:block}}
+@media print{.topbar,.controls{display:none}.layout{display:block}.collapsible[hidden]{display:block}}
 /* Complete Virtue linked-article search */
 .cvs{--accent:#0f766e;background:var(--surface);border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);box-shadow:var(--shadow);margin-bottom:26px;overflow:hidden;position:relative}
 [data-theme="dark"] .cvs{--accent:#5eead4}
@@ -184,13 +182,6 @@ footer a{color:var(--text)}
     <p>A list of Wikipedia articles.</p>
   </div>
 
-  <nav class="nav" aria-label="Expand or collapse sections">
-    <div class="controls">
-      <button class="btn" type="button" id="expandAll">Expand all</button>
-      <button class="btn" type="button" id="collapseAll">Collapse all</button>
-    </div>
-  </nav>
-
   <main id="content" tabindex="-1">
     <section class="cvs" id="cv-search" aria-labelledby="cv-search-h">
       <div class="cvs-head">
@@ -222,7 +213,10 @@ footer a{color:var(--text)}
         <button class="btn cvs-more" type="button" id="cvMore" hidden>Show all results</button>
       </div>
     </section>
-    
+    <div class="controls">
+      <button class="btn" type="button" id="expandAll">Expand all</button>
+      <button class="btn" type="button" id="collapseAll">Collapse all</button>
+    </div>
     <section class="cat" id="ethics" style="--a-l:#c2410c;--a-d:#fb923c" aria-labelledby="ethics-h">
       <header class="cat-head">
         <h2 id="ethics-h">
