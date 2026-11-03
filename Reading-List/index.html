@@ -143,6 +143,32 @@ footer a{color:var(--text)}
   .cards{grid-template-columns:1fr}
 }
 @media print{.topbar,.nav,.controls{display:none}.layout{display:block}.collapsible[hidden]{display:block}}
+/* Complete Virtue linked-article search */
+.cvs{--accent:#0f766e;background:var(--surface);border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);box-shadow:var(--shadow);margin-bottom:26px;overflow:hidden;position:relative}
+[data-theme="dark"] .cvs{--accent:#5eead4}
+.cvs::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--accent)}
+.cvs-head{padding:20px 22px 4px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent)}
+.cvs-head h2{margin:0;font-family:var(--serif);font-size:1.45rem;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.cvs-head p{margin:6px 0 0;color:var(--muted);font-size:.93rem}
+.cvs-head p a{color:var(--accent);font-weight:600}
+.cvs-body{padding:12px 22px 18px}
+.cvs-field{position:relative}
+.cvs-field svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);pointer-events:none}
+.cvs-field input{width:100%;font:inherit;font-size:16px;padding:10px 14px 10px 36px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);box-shadow:var(--shadow);-webkit-appearance:none;appearance:none}
+.cvs-field input::placeholder{color:var(--muted)}
+.cvs-field input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.cvs-status{margin:8px 2px 0;color:var(--muted);font-size:.84rem;font-weight:500}
+.cvs-res{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.cvs-res[hidden],.cvs-more[hidden]{display:none}
+.cvs-res li{position:relative;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px 12px 18px;overflow-wrap:anywhere}
+.cvs-res li::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--accent);opacity:.75}
+.cvs-res a{font-weight:600;font-size:1.02rem;line-height:1.3;text-decoration:none}
+.cvs-res a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+.cvs-tag{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);vertical-align:2px;white-space:nowrap}
+.cvs-res p{margin:6px 0 0;color:var(--muted);font-size:.9rem;line-height:1.5}
+.cvs-more{margin-top:12px}
+@media (max-width:560px){.cvs-head{padding:18px 16px 4px}.cvs-head h2{font-size:1.2rem}.cvs-body{padding:10px 16px 16px}}
+@media print{.cvs{display:none}}
 .count,.nav-count{display:none!important}
 </style>
 <style id="topics-nav-style">
@@ -196,6 +222,22 @@ footer a{color:var(--text)}
 
   <main id="content" tabindex="-1">
     <p id="resultStatus" class="visually-hidden" aria-live="polite"></p>
+    <section class="cvs" id="cv-search" aria-labelledby="cv-search-h">
+      <div class="cvs-head">
+        <h2 id="cv-search-h">Search Complete Virtue's linked articles</h2>
+        <p>Searches the text of the Wikipedia articles linked from <a href="https://en.wikipedia.org/wiki/User:Bookmark_List" target="_blank" rel="noopener">Complete Virtue</a>. Every word you type must appear in the article.</p>
+      </div>
+      <div class="cvs-body">
+        <div class="cvs-field" role="search">
+          <label for="cvq" class="visually-hidden">Search Complete Virtue's linked articles</label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="cvq" type="search" placeholder="e.g. fear, self, virtue" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="cvStatus">
+        </div>
+        <p class="cvs-status" id="cvStatus" aria-live="polite">Type a word to search the linked articles.</p>
+        <ul class="cvs-res" id="cvRes" hidden></ul>
+        <button class="btn cvs-more" type="button" id="cvMore" hidden>Show all results</button>
+      </div>
+    </section>
     
     <section class="cat" id="ethics" style="--a-l:#c2410c;--a-d:#fb923c" aria-labelledby="ethics-h">
       <header class="cat-head">
@@ -699,6 +741,86 @@ footer a{color:var(--text)}
     if(e.key==="/"&&document.activeElement!==q&&!/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){e.preventDefault();q.focus();}
   });
 })();
+</script>
+<script>
+/* Complete Virtue linked-article search (data loads on first use) */
+var CVS=(function(){
+  "use strict";
+  function esc(s){return s.replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+  function terms(q){var seen={},out=[];q.toLowerCase().trim().split(/\s+/).forEach(function(w){if(w&&!seen[w]){seen[w]=1;out.push(w);}});return out;}
+  function wordRe(w,f){return new RegExp("(?<![\\p{L}\\p{N}])"+escRe(w),f||"iu");}
+  function count(re,s){var m=s.match(new RegExp(re.source,"giu"));return m?m.length:0;}
+  function byTitle(x,y){return x.a.title.localeCompare(y.a.title);}
+  function search(arts,q){
+    var ws=terms(q),res=[];
+    if(!ws.length)return arts.map(function(a){return{a:a,inTitle:false,score:0};}).sort(byTitle);
+    arts.forEach(function(a){
+      var hay=a.title+"\n"+a.summary+"\n"+a.text,ok=true,tHits=0,hits=0;
+      for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);if(!re.test(hay)){ok=false;break;}
+        if(re.test(a.title))tHits++;hits+=count(re,a.summary)*3+count(re,a.text);}
+      if(ok)res.push({a:a,inTitle:tHits>0,score:tHits*100000+hits});
+    });
+    return res.sort(function(x,y){return y.score-x.score||byTitle(x,y);});
+  }
+  function snippet(a,ws,len){
+    len=len||240;
+    if(!ws.length)return esc(a.summary.length>len?a.summary.slice(0,len).replace(/\s+\S*$/,"")+"…":a.summary);
+    var src=null,pos=-1;
+    [a.summary,a.text].some(function(s){ws.forEach(function(w){var m=wordRe(w).exec(s);if(m&&(pos<0||m.index<pos)){src=s;pos=m.index;}});return !!src;});
+    if(!src){src=a.summary;pos=0;}
+    var st=Math.max(0,pos-80),en=Math.min(src.length,st+len);
+    if(st>0)st=src.indexOf(" ",st)+1||st;
+    if(en<src.length){var sp=src.lastIndexOf(" ",en);if(sp>pos)en=sp;}
+    var piece=src.slice(st,en).replace(/\n+/g," ");
+    var re=new RegExp("(?<![\\p{L}\\p{N}])("+ws.map(escRe).sort(function(x,y){return y.length-x.length;}).join("|")+")","giu");
+    var out="",last=0,m;
+    while((m=re.exec(piece))){out+=esc(piece.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
+    out+=esc(piece.slice(last));
+    return (st>0?"…":"")+out+(en<src.length?"…":"");
+  }
+  var api={search:search,snippet:snippet,terms:terms};
+  if(typeof document==="undefined")return api;
+
+  var input=document.getElementById("cvq"),list=document.getElementById("cvRes"),status=document.getElementById("cvStatus"),more=document.getElementById("cvMore");
+  if(!input)return api;
+  var ARTS=null,loading=null,LIMIT=25,showAll=false,timer;
+  function load(){
+    if(!loading){status.textContent="Loading articles…";
+      loading=fetch("cv-articles.json").then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){ARTS=d;render();})
+        .catch(function(){loading=null;status.textContent="Could not load the article index. Please try again.";});}
+    return loading;
+  }
+  function render(){
+    if(!ARTS)return;
+    var ws=terms(input.value);
+    if(!ws.length&&!showAll){list.hidden=true;list.innerHTML="";more.hidden=false;more.textContent="Show all "+ARTS.length+" linked articles";
+      status.textContent=ARTS.length+" linked articles. Type a word to search them.";return;}
+    var r=search(ARTS,input.value),shown=showAll?r:r.slice(0,LIMIT);
+    status.textContent=ws.length?(r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":"")):("All "+ARTS.length+" linked articles");
+    list.hidden=false;
+    list.innerHTML=shown.length?shown.map(function(x){return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a>'+(x.inTitle?'<span class="cvs-tag">in title</span>':'')+'<p>'+snippet(x.a,ws)+'</p></li>';}).join(""):'<li><p>No linked article contains all of those words.</p></li>';
+    more.hidden=!(r.length>shown.length);more.textContent="Show all "+r.length+" results";
+  }
+  function syncUrl(){
+    try{var u=new URL(location.href),v=input.value.trim();
+      if(v){u.searchParams.set("cvq",v);u.hash="cv-search";}else u.searchParams.delete("cvq");
+      history.replaceState(null,"",u);}catch(e){}
+  }
+  input.addEventListener("focus",load,{once:true});
+  input.addEventListener("input",function(){showAll=false;load();clearTimeout(timer);timer=setTimeout(function(){render();syncUrl();},120);});
+  input.addEventListener("keydown",function(e){if(e.key==="Escape"){input.value="";showAll=false;render();syncUrl();}});
+  more.addEventListener("click",function(){showAll=true;render();});
+
+  /* Deep links: ?cvq=fear#cv-search  or  #cv-search?q=fear */
+  var q0=null;try{q0=new URLSearchParams(location.search).get("cvq");}catch(e){}
+  var hm=/^#cv-search\?(.*)$/.exec(location.hash);
+  if(hm){try{q0=new URLSearchParams(hm[1]).get("q")||q0;}catch(e){}}
+  if(q0){input.value=q0;load();}
+  if(hm){var sec=document.getElementById("cv-search");requestAnimationFrame(function(){sec.scrollIntoView();});}
+  return api;
+})();
+if(typeof module!=="undefined")module.exports=CVS;
 </script>
 </body>
 </html>
