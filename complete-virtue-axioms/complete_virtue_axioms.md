@@ -1,5 +1,24 @@
 ---
 ---
+<style>
+#theme{position:fixed;top:14px;right:16px;z-index:50;background:#1f2328;color:#e6edf3;border:1px solid #444c56;border-radius:8px;padding:.4rem .75rem;font:500 14px system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer}
+#theme:hover{background:#30363d}
+[data-theme=dark] body{background:#15171b;color:#e8e6e1}
+[data-theme=dark] .markdown-body{color:#e8e6e1}
+[data-theme=dark] .markdown-body a{color:#8cc5c9}
+[data-theme=dark] .markdown-body h1,[data-theme=dark] .markdown-body h2{border-bottom-color:#2d3139}
+[data-theme=dark] .markdown-body h1,[data-theme=dark] .markdown-body h2,[data-theme=dark] .markdown-body h3,[data-theme=dark] .markdown-body h4{color:#f0eee9}
+[data-theme=dark] .markdown-body hr{background-color:#2d3139}
+[data-theme=dark] .markdown-body blockquote{color:#9aa0a8;border-left-color:#3a3f48}
+[data-theme=dark] .markdown-body code{background-color:rgba(255,255,255,.1)}
+[data-theme=dark] .markdown-body pre{background-color:#1d2026;color:#e8e6e1}
+[data-theme=dark] .markdown-body table tr{background-color:#15171b;border-top-color:#2d3139}
+[data-theme=dark] .markdown-body table tr:nth-child(2n){background-color:#1d2026}
+[data-theme=dark] .markdown-body table th,[data-theme=dark] .markdown-body table td{border-color:#2d3139}
+</style>
+<script>try{var t=localStorage.getItem('topics-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<button id="theme" type="button" aria-label="Toggle dark mode">&#9680; Theme</button>
+<script>document.getElementById('theme').addEventListener('click',function(){var d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('topics-theme',n)}catch(e){}});</script>
 
 [Internal Links](https://arthulian.github.io/Topics/) · [Wikipedia](https://arthulian.github.io/Topics/Reading-List/) · [Grokipedia](https://arthulian.github.io/Topics/List/) · [Ethics](https://arthulian.github.io/Topics/Ethics/) · [Complete Virtue](https://arthulian.github.io/Topics/complete-virtue/)
 
