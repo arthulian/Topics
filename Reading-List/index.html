@@ -23,8 +23,8 @@
   --bg:#121216;--bg-grad:#17171d;--surface:#1c1c23;--surface-2:#22222a;--text:#ecebf0;--muted:#a8a6b3;--border:#2f2f3a;
   --shadow:0 1px 2px rgba(0,0,0,.4);--shadow-h:0 8px 24px rgba(0,0,0,.45);--focus:#93c5fd;
 }
-.cat,.nav a{--accent:var(--a-l)}
-[data-theme="dark"] .cat,[data-theme="dark"] .nav a{--accent:var(--a-d)}
+.cat{--accent:var(--a-l)}
+[data-theme="dark"] .cat{--accent:var(--a-d)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -53,18 +53,9 @@ a{color:inherit}
 .stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .pill{font-size:.8rem;font-weight:600;padding:4px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--muted)}
 
-/* Nav */
-.nav{position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;padding:4px 2px}
-.nav h2{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:6px 10px 8px;font-weight:600}
-.nav ul{list-style:none;margin:0;padding:0}
-.nav a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;text-decoration:none;font-size:.92rem;font-weight:500;color:var(--text);border-left:3px solid transparent;transition:background .15s}
-.nav a:hover{background:var(--surface)}
-.nav a.active{background:var(--surface);border-left-color:var(--accent);box-shadow:var(--shadow)}
-.nav .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none}
-.nav-label{flex:1}
-.nav-count{font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.nav a.empty{opacity:.45}
-.controls{display:flex;gap:8px;margin:16px 10px 0}
+/* Section controls */
+.nav{align-self:start;padding:4px 2px}
+.controls{display:flex;gap:8px;margin:0 10px}
 .btn{font:inherit;font-size:.82rem;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;box-shadow:var(--shadow);transition:box-shadow .15s,transform .15s}
 .btn:hover{box-shadow:var(--shadow-h);transform:translateY(-1px)}
 
@@ -110,20 +101,12 @@ footer a{color:var(--text)}
 @media (max-width:900px){
   .layout{grid-template-columns:minmax(0,1fr);gap:16px}
   .hero{padding-top:28px}
-  .nav{position:static;z-index:10;max-height:none;overflow:visible;margin:0 -20px;padding:8px 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-  .nav h2{display:none}
-  .nav ul{display:flex;flex-wrap:wrap;gap:6px;overflow:visible;padding-bottom:2px}
-  .nav ul::-webkit-scrollbar{display:none}
-  .nav a{white-space:normal;max-width:100%;border-left:0;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.84rem}
-  .nav a.active{border-color:var(--accent)}
   .controls{margin:8px 0 0}
-  html{scroll-padding-top:150px}
 }
 @media (max-width:560px){
   .topbar-inner{padding:10px 14px;gap:8px}
   .brand span{display:none}
   .layout{padding:0 14px 48px}
-  .nav{margin:0 -14px;padding:8px 14px}
   .cat-head{padding:18px 16px 4px}
   .cat > .collapsible{padding:4px 16px 16px}
   .cat-blurb{margin-left:0}
@@ -171,7 +154,7 @@ footer a{color:var(--text)}
 .cvs-res mark,.cvs-items mark{background:color-mix(in srgb,var(--accent) 28%,transparent);color:inherit;border-radius:3px;padding:0 1px}
 @media (max-width:560px){.cvs-head{padding:18px 16px 4px}.cvs-head h2{font-size:1.2rem}.cvs-body{padding:10px 16px 16px}}
 @media print{.cvs{display:none}}
-.count,.nav-count{display:none!important}
+.count{display:none!important}
 </style>
 <style id="topics-nav-style">
 #topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50}
@@ -201,15 +184,7 @@ footer a{color:var(--text)}
     <p>A list of Wikipedia articles.</p>
   </div>
 
-  <nav class="nav" aria-label="Table of contents">
-    <h2>Contents</h2>
-    <ul>
-        <li><a href="#ethics" style="--a-l:#c2410c;--a-d:#fb923c"><span class="dot" aria-hidden="true"></span><span class="nav-label">Ethics &amp; Value Theory</span><span class="nav-count" data-count-for="ethics">5</span></a></li>
-        <li><a href="#logic" style="--a-l:#1d4ed8;--a-d:#60a5fa"><span class="dot" aria-hidden="true"></span><span class="nav-label">Logic &amp; Epistemology</span><span class="nav-count" data-count-for="logic">3</span></a></li>
-        <li><a href="#metaphysics" style="--a-l:#7c3aed;--a-d:#a78bfa"><span class="dot" aria-hidden="true"></span><span class="nav-label">Metaphysics &amp; Philosophy of Religion</span><span class="nav-count" data-count-for="metaphysics">5</span></a></li>
-        <li><a href="#political" style="--a-l:#047857;--a-d:#34d399"><span class="dot" aria-hidden="true"></span><span class="nav-label">Political &amp; Social Philosophy</span><span class="nav-count" data-count-for="political">4</span></a></li>
-        <li><a href="#psychology" style="--a-l:#be185d;--a-d:#f472b6"><span class="dot" aria-hidden="true"></span><span class="nav-label">Psychology &amp; Behavioral Science</span><span class="nav-count" data-count-for="psychology">8</span></a></li>
-    </ul>
+  <nav class="nav" aria-label="Expand or collapse sections">
     <div class="controls">
       <button class="btn" type="button" id="expandAll">Expand all</button>
       <button class="btn" type="button" id="collapseAll">Collapse all</button>
@@ -673,28 +648,6 @@ footer a{color:var(--text)}
   });
   document.getElementById("expandAll").addEventListener("click",function(){toggles.forEach(function(b){setOpen(b,true);});});
   document.getElementById("collapseAll").addEventListener("click",function(){toggles.forEach(function(b){setOpen(b,false);});});
-
-  /* Nav: open target section when jumping */
-  var navLinks=Array.prototype.slice.call(document.querySelectorAll(".nav a"));
-  navLinks.forEach(function(a){
-    a.addEventListener("click",function(){
-      var sec=document.querySelector(a.getAttribute("href"));
-      if(sec){var b=sec.querySelector(".cat-head .toggle");if(b)setOpen(b,true);}
-    });
-  });
-
-  /* Scrollspy */
-  var cats=Array.prototype.slice.call(document.querySelectorAll(".cat"));
-  if("IntersectionObserver" in window){
-    var visible={};
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){visible[e.target.id]=e.isIntersecting?e.boundingClientRect.top:null;});
-      var best=null,bestTop=Infinity;
-      cats.forEach(function(c){var t=visible[c.id];if(t!=null&&!c.hidden&&Math.abs(t)<bestTop){bestTop=Math.abs(t);best=c.id;}});
-      if(best)navLinks.forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+best);});
-    },{rootMargin:"-80px 0px -55% 0px",threshold:0});
-    cats.forEach(function(c){io.observe(c);});
-  }
 })();
 </script>
 <script>
