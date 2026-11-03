@@ -122,11 +122,11 @@ footer a{color:var(--text)}
 @media (max-width:900px){
   .layout{grid-template-columns:minmax(0,1fr);gap:16px}
   .hero{padding-top:28px}
-  .nav{position:sticky;top:64px;z-index:10;max-height:none;overflow:visible;margin:0 -20px;padding:8px 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav{position:static;z-index:10;max-height:none;overflow:visible;margin:0 -20px;padding:8px 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
   .nav h2{display:none}
-  .nav ul{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+  .nav ul{display:flex;flex-wrap:wrap;gap:6px;overflow:visible;padding-bottom:2px}
   .nav ul::-webkit-scrollbar{display:none}
-  .nav a{white-space:nowrap;border-left:0;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.84rem}
+  .nav a{white-space:normal;max-width:100%;border-left:0;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.84rem}
   .nav a.active{border-color:var(--accent)}
   .controls{margin:8px 0 0}
   html{scroll-padding-top:150px}
