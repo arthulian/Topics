@@ -60,6 +60,38 @@ footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px}
 @media (max-width:600px){.wrap{padding-top:32px}.head{padding:16px}.grid{padding:0 16px;grid-template-columns:1fr}.panel:not(.closed) .grid{padding-bottom:16px}tbody th{width:auto}th,td{display:block;width:100%}tbody th{border-bottom:0;padding-bottom:2px}}
 @media print{.bar,nav.toc{display:none}.panel.closed .content{grid-template-rows:1fr}.panel{break-inside:avoid;box-shadow:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+.cvfw{--cvfw-accent:#1d4ed8;background:var(--surface);border:1px solid var(--border);border-top:4px solid var(--cvfw-accent);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 22px;overflow:hidden}
+[data-theme=dark] .cvfw{--cvfw-accent:#93c5fd}
+.cvfw h2{margin:0;padding:20px 24px 0;font:650 clamp(20px,3vw,26px)/1.2 var(--serif)}
+.cvfw-body{padding:16px 24px 20px}
+.cvfw-field{position:relative}
+.cvfw-field svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);pointer-events:none}
+.cvfw-field input{width:100%;font:16px/1.4 var(--sans);color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:10px 16px 10px 40px;box-shadow:var(--shadow);-webkit-appearance:none;appearance:none}
+.cvfw-field input::placeholder{color:var(--muted)}
+.cvfw-field input:focus{outline:none;border-color:var(--cvfw-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--cvfw-accent) 22%,transparent)}
+.cvfw-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.cvfw-chip{font:500 13px var(--sans);color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;line-height:1.2}
+.cvfw-chip:hover{color:var(--text);border-color:var(--cvfw-accent)}
+.cvfw-chip[aria-pressed=true]{background:var(--cvfw-accent);border-color:var(--cvfw-accent);color:#fff}
+[data-theme=dark] .cvfw-chip[aria-pressed=true]{color:#121216}
+.cvfw-chip .n{font-weight:500;opacity:.75;margin-left:4px}
+.cvfw-status{margin:10px 2px 0;min-height:1.2em;color:var(--muted);font:500 13px var(--sans)}
+.cvfw-sub{margin:16px 2px 0;font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cvfw-sub[hidden],.cvfw-res[hidden],.cvfw-more[hidden]{display:none}
+.cvfw-res{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.cvfw-res>li{position:relative;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--cvfw-accent);border-radius:10px;padding:12px 16px;overflow-wrap:anywhere}
+.cvfw-res a{font-weight:600;text-decoration:none}
+.cvfw-res a:hover{text-decoration:underline;text-underline-offset:3px}
+.cvfw-tag{display:inline-block;margin-left:8px;font:600 11px var(--sans);padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--cvfw-accent) 16%,transparent);vertical-align:2px}
+.cvfw-res p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
+.cvfw-more{margin-top:12px}
+.cvfw-items{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+.cvfw-res .cvfw-items li{background:none;border:0;border-radius:0;padding:0;color:var(--muted);font-size:14px;line-height:1.45}
+.cvfw-items b{color:var(--text);font-weight:600}
+.cvfw-items .cvfw-tag{margin:0 6px 0 0}
+.cvfw-res mark,.cvfw-items mark{background:color-mix(in srgb,var(--cvfw-accent) 28%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+@media (max-width:600px){.cvfw h2{padding:16px 16px 0;font-size:20px}.cvfw-body{padding:12px 16px 16px}}
+@media print{.cvfw{display:none}}
 </style>
 <style id="topics-nav-style">
 #topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50}
@@ -82,6 +114,32 @@ footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px}
 <div class="eyebrow">A framework for character</div>
 <h1>Complete Virtue</h1>
 </header>
+<section class="cvfw" id="cvfw-search" aria-labelledby="cvfw-h">
+<h2 id="cvfw-h">Search linked articles</h2>
+<div class="cvfw-body">
+<div class="cvfw-field" role="search">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+<input id="cvfw-q" type="search" placeholder="e.g. fear, self, virtue" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search linked articles" aria-describedby="cvfw-status">
+</div>
+<div class="cvfw-chips" id="cvfw-chips" role="group" aria-label="Filter by category">
+<button type="button" class="cvfw-chip" data-cat="all" aria-pressed="true">All</button>
+<button type="button" class="cvfw-chip" data-cat="coined_terms" aria-pressed="false">Coined terms</button>
+<button type="button" class="cvfw-chip" data-cat="concepts" aria-pressed="false">Concepts</button>
+<button type="button" class="cvfw-chip" data-cat="axioms" aria-pressed="false">Axioms</button>
+<button type="button" class="cvfw-chip" data-cat="principles" aria-pressed="false">Principles</button>
+<button type="button" class="cvfw-chip" data-cat="methods" aria-pressed="false">Methods</button>
+<button type="button" class="cvfw-chip" data-cat="theories" aria-pressed="false">Theories</button>
+<button type="button" class="cvfw-chip" data-cat="frameworks" aria-pressed="false">Frameworks</button>
+</div>
+<p class="cvfw-status" id="cvfw-status" aria-live="polite"></p>
+<p class="cvfw-sub" id="cvfw-con-h" hidden>Named ideas</p>
+<ul class="cvfw-res" id="cvfw-con" hidden></ul>
+<button class="btn cvfw-more" type="button" id="cvfw-con-more" hidden>Show all</button>
+<p class="cvfw-sub" id="cvfw-res-h" hidden>Articles</p>
+<ul class="cvfw-res" id="cvfw-res" hidden></ul>
+<button class="btn cvfw-more" type="button" id="cvfw-more" hidden>Show all results</button>
+</div>
+</section>
 <section class="panel" id="s1" style="--accent:#7c3aed">
 <button class="head" aria-expanded="true"><span class="num">1</span><h2>Integrity of Belief and Conduct</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
 <div class="content"><div class="grid"><article class="card"><h3>Belief Evaluation</h3><ul><li>Test each premise against the intellectual golden rule (an impartial standard applied proportionally to all), ensuring that there is alignment between each inference and the empirical evidence.</li></ul></article><article class="card"><h3>Conduct Accountability</h3><ul><li>Render to each and all what is due to them (their moral and legal rights) in proportion to their functional agency. Equity (epieikeia) covers irregular cases so that the ordinance is framed to fit the circumstances.</li></ul></article></div></div></section>
@@ -104,6 +162,176 @@ panels.forEach(p=>p.querySelector('.head').addEventListener('click',()=>{setP(p,
 allBtn.addEventListener('click',()=>{const open=allBtn.textContent==='Expand all';panels.forEach(p=>setP(p,open));sync()});
 document.querySelectorAll('nav.toc a').forEach(a=>a.addEventListener('click',()=>{const p=document.querySelector(a.getAttribute('href'));if(p&&p.classList.contains('panel'))setP(p,true);sync()}));
 document.getElementById('theme').addEventListener('click',()=>{const d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('topics-theme',n)}catch(e){}});
+</script>
+<script>
+/* Framework-limited search of Complete Virtue's linked articles. Words are read from this page at load. */
+(function(){
+  "use strict";
+  var input=document.getElementById("cvfw-q");
+  if(!input)return;
+  var list=document.getElementById("cvfw-res"),status=document.getElementById("cvfw-status"),more=document.getElementById("cvfw-more");
+  var conList=document.getElementById("cvfw-con"),conH=document.getElementById("cvfw-con-h"),conMore=document.getElementById("cvfw-con-more"),resH=document.getElementById("cvfw-res-h"),chips=document.getElementById("cvfw-chips");
+  function frameworkText(){
+    var root=document.querySelector("main.wrap");
+    if(!root)return "";
+    var clone=root.cloneNode(true);
+    var widget=clone.querySelector("#cvfw-search");
+    if(widget)widget.remove();
+    return clone.textContent||"";
+  }
+  var FW_TEXT=frameworkText();
+  var FW_WORDS=new Set();
+  var tokenRe=/[\p{L}\p{N}]+/gu,tok;
+  while((tok=tokenRe.exec(FW_TEXT)))FW_WORDS.add(tok[0].toLowerCase());
+  function esc(s){return s.replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+  function terms(q){var seen={},out=[];q.toLowerCase().trim().split(/\s+/).forEach(function(w){if(w&&!seen[w]){seen[w]=1;out.push(w);}});return out;}
+  function wordRe(w,f){return new RegExp("(?<![\\p{L}\\p{N}])"+escRe(w),f||"iu");}
+  function inFramework(w){return FW_WORDS.has(w)||wordRe(w).test(FW_TEXT);}
+  function missingWords(ws){return ws.filter(function(w){return !inFramework(w);});}
+  function missingMessage(missing){
+    var quoted=missing.map(function(w){return "“"+w+"”";});
+    var list=quoted.length===1?quoted[0]:quoted.slice(0,-1).join(", ")+" and "+quoted[quoted.length-1];
+    return "No results — "+list+" "+(missing.length===1?"doesn't":"don't")+" appear in Complete Virtue.";
+  }
+  function count(re,s){var m=s.match(new RegExp(re.source,"giu"));return m?m.length:0;}
+  function byTitle(x,y){return x.a.title.localeCompare(y.a.title);}
+  function search(arts,q){
+    var ws=terms(q),res=[];
+    if(!ws.length)return arts.map(function(a){return{a:a,inTitle:false,score:0};}).sort(byTitle);
+    arts.forEach(function(a){
+      var hay=a.title+"\n"+a.summary+"\n"+a.text,ok=true,tHits=0,hits=0;
+      for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);if(!re.test(hay)){ok=false;break;}
+        if(re.test(a.title))tHits++;hits+=count(re,a.summary)*3+count(re,a.text);}
+      if(ok)res.push({a:a,inTitle:tHits>0,score:tHits*100000+hits});
+    });
+    return res.sort(function(x,y){return y.score-x.score||byTitle(x,y);});
+  }
+  function snippet(a,ws,len){
+    len=len||240;
+    if(!ws.length)return esc(a.summary.length>len?a.summary.slice(0,len).replace(/\s+\S*$/,"")+"…":a.summary);
+    var src=null,pos=-1;
+    [a.summary,a.text].some(function(s){ws.forEach(function(w){var m=wordRe(w).exec(s);if(m&&(pos<0||m.index<pos)){src=s;pos=m.index;}});return !!src;});
+    if(!src){src=a.summary;pos=0;}
+    var st=Math.max(0,pos-80),en=Math.min(src.length,st+len);
+    if(st>0)st=src.indexOf(" ",st)+1||st;
+    if(en<src.length){var sp=src.lastIndexOf(" ",en);if(sp>pos)en=sp;}
+    var piece=src.slice(st,en).replace(/\n+/g," ");
+    var re=new RegExp("(?<![\\p{L}\\p{N}])("+ws.map(escRe).sort(function(x,y){return y.length-x.length;}).join("|")+")","giu");
+    var out="",last=0,m;
+    while((m=re.exec(piece))){out+=esc(piece.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
+    out+=esc(piece.slice(last));
+    return (st>0?"…":"")+out+(en<src.length?"…":"");
+  }
+  var CATS=[["coined_terms","Coined term"],["concepts","Concept"],["axioms","Axiom"],["principles","Principle"],["methods","Method"],["theories","Theory"],["frameworks","Framework"]];
+  var CATN={};CATS.forEach(function(c){CATN[c[0]]=c[1];});
+  function hl(s,ws){
+    if(!ws.length)return esc(s);
+    var re=new RegExp("(?<![\\p{L}\\p{N}])("+ws.map(escRe).sort(function(x,y){return y.length-x.length;}).join("|")+")","giu"),out="",last=0,m;
+    while((m=re.exec(s))){out+=esc(s.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
+    return out+esc(s.slice(last));
+  }
+  function searchConcepts(con,q,cat){
+    var ws=terms(q),groups=[],n=0;
+    con.forEach(function(a){
+      var items=[],aScore=0;
+      CATS.forEach(function(c){
+        if(cat!=="all"&&cat!==c[0])return;
+        (a[c[0]]||[]).forEach(function(it){
+          var ok=true,sc=0;
+          for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);
+            if(re.test(it.name))sc+=10;else if(re.test(it.note))sc+=1;else if(re.test(a.title))sc+=0.5;else{ok=false;break;}}
+          if(ok){items.push({c:c[0],it:it,score:sc});if(sc>aScore)aScore=sc;}
+        });
+      });
+      if(items.length){items.sort(function(x,y){return y.score-x.score;});groups.push({a:a,items:items,score:aScore});n+=items.length;}
+    });
+    groups.sort(function(x,y){return ws.length?(y.score-x.score||x.a.title.localeCompare(y.a.title)):x.a.title.localeCompare(y.a.title);});
+    return {groups:groups,n:n};
+  }
+  var ARTS=null,CON=null,loading=null,LIMIT=25,GLIMIT=8,showAll=false,showAllCon=false,cat="all",timer;
+  function load(){
+    if(!loading){status.textContent="Loading articles…";
+      loading=Promise.all([
+        fetch("../Reading-List/cv-articles.json").then(function(r){if(!r.ok)throw 0;return r.json();}),
+        fetch("../Reading-List/cv-concepts.json").then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;})
+      ]).then(function(d){ARTS=d[0];CON=d[1];countChips();render();})
+        .catch(function(){loading=null;status.textContent="Could not load the article index. Please try again.";});}
+    return loading;
+  }
+  function countChips(){
+    if(!CON)return;
+    Array.prototype.forEach.call(chips.querySelectorAll(".cvfw-chip"),function(b){
+      var k=b.getAttribute("data-cat"),n=0;
+      CON.forEach(function(a){CATS.forEach(function(c){if(k==="all"||k===c[0])n+=(a[c[0]]||[]).length;});});
+      if(!b.querySelector(".n"))b.insertAdjacentHTML("beforeend",'<span class="n">'+n+'</span>');
+    });
+  }
+  function clearResults(){
+    list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
+    conH.hidden=conList.hidden=conMore.hidden=true;conList.innerHTML="";
+  }
+  function renderConcepts(ws){
+    if(!CON){conH.hidden=conList.hidden=conMore.hidden=true;return null;}
+    var r=searchConcepts(CON,input.value,cat),g=showAllCon?r.groups:r.groups.slice(0,GLIMIT);
+    conH.hidden=false;conList.hidden=false;
+    conH.textContent=(cat==="all"?"Named ideas":CATS.filter(function(c){return c[0]===cat;})[0][1].replace(/y$/,"ie")+"s")+" — "+r.n+" in "+r.groups.length+" article"+(r.groups.length===1?"":"s");
+    conList.innerHTML=g.length?g.map(function(x){
+      return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a><ul class="cvfw-items">'+
+        x.items.map(function(i){return '<li><span class="cvfw-tag">'+CATN[i.c]+'</span><b>'+hl(i.it.name,ws)+'</b>'+(i.it.note?' — '+hl(i.it.note,ws):'')+'</li>';}).join("")+'</ul></li>';
+    }).join(""):'<li><p>No '+(cat==="all"?"named ideas":esc(conH.textContent.split(" — ")[0].toLowerCase()))+' match those words.</p></li>';
+    conMore.hidden=!(r.groups.length>g.length);conMore.textContent="Show all "+r.groups.length+" articles";
+    return r;
+  }
+  function render(){
+    var ws=terms(input.value),missing=missingWords(ws);
+    if(missing.length){clearResults();status.textContent=missingMessage(missing);return;}
+    if(!ARTS)return;
+    if(cat!=="all"){
+      list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
+      var rc=renderConcepts(ws);
+      status.textContent=rc?(ws.length?"Searching "+conH.textContent.split(" — ")[0].toLowerCase()+" only.":"Browsing "+conH.textContent.split(" — ")[0].toLowerCase()+". Type to narrow."):"Could not load the extracted ideas.";
+      return;
+    }
+    if(!ws.length&&!showAll){clearResults();
+      more.hidden=false;more.textContent="Show all "+ARTS.length+" linked articles";
+      status.textContent=ARTS.length+" linked articles.";return;}
+    if(ws.length)renderConcepts(ws);else{conH.hidden=conList.hidden=conMore.hidden=true;}
+    var r=search(ARTS,input.value),shown=showAll?r:r.slice(0,LIMIT);
+    status.textContent=ws.length?(r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":"")):("All "+ARTS.length+" linked articles");
+    list.hidden=false;resH.hidden=!ws.length;resH.textContent="Articles — "+r.length;
+    list.innerHTML=shown.length?shown.map(function(x){return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a>'+(x.inTitle?'<span class="cvfw-tag">in title</span>':'')+'<p>'+snippet(x.a,ws)+'</p></li>';}).join(""):'<li><p>No linked article contains all of those words.</p></li>';
+    more.hidden=!(r.length>shown.length);more.textContent="Show all "+r.length+" results";
+  }
+  function setCat(k){
+    cat=k;showAllCon=false;
+    Array.prototype.forEach.call(chips.querySelectorAll(".cvfw-chip"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-cat")===k?"true":"false");});
+  }
+  function syncUrl(){
+    try{var u=new URL(location.href),v=input.value.trim();
+      if(v)u.searchParams.set("fwq",v);else u.searchParams.delete("fwq");
+      if(cat!=="all")u.searchParams.set("fwc",cat);else u.searchParams.delete("fwc");
+      if(v||cat!=="all")u.hash="cvfw-search";
+      history.replaceState(null,"",u);}catch(e){}
+  }
+  function schedule(){clearTimeout(timer);timer=setTimeout(function(){render();syncUrl();},120);}
+  input.addEventListener("input",function(){showAll=false;showAllCon=false;if(!missingWords(terms(input.value)).length)load();schedule();});
+  input.addEventListener("keydown",function(e){if(e.key==="Escape"){input.value="";showAll=false;showAllCon=false;render();syncUrl();}});
+  more.addEventListener("click",function(){showAll=true;render();});
+  conMore.addEventListener("click",function(){showAllCon=true;render();});
+  chips.addEventListener("click",function(e){
+    var b=e.target.closest(".cvfw-chip");if(!b)return;
+    setCat(b.getAttribute("data-cat"));
+    if(missingWords(terms(input.value)).length){render();syncUrl();return;}
+    load().then(function(){render();syncUrl();});
+    if(ARTS){render();syncUrl();}
+  });
+  var q0=null,c0=null;try{var sp=new URLSearchParams(location.search);q0=sp.get("fwq");c0=sp.get("fwc");}catch(e){}
+  if(c0&&CATN[c0])setCat(c0);
+  if(q0)input.value=q0;
+  if((q0&&!missingWords(terms(q0)).length)||(c0&&CATN[c0]&&!missingWords(terms(q0||"")).length))load();
+  else if(q0)render();
+})();
 </script>
 </body>
 </html>
