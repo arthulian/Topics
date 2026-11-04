@@ -62,7 +62,7 @@ a{color:inherit}
 main{min-width:0}
 .cat{background:var(--surface);border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);box-shadow:var(--shadow);margin-bottom:26px;overflow:hidden;position:relative}
 .cat::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--accent)}
-.cat-head{padding:20px 22px 6px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent)}
+.cat-head{padding:20px 22px 20px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent)}
 .cat h2,.sub h3{margin:0}
 .toggle{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;cursor:pointer;border-radius:8px}
 .toggle:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
@@ -83,11 +83,7 @@ main{min-width:0}
 
 /* Cards */
 .cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
-.card{position:relative;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px 14px 18px;transition:transform .18s,box-shadow .18s,border-color .18s}
-.card::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--accent);opacity:.75}
-.card:hover,.card:focus-within{transform:translateY(-2px);box-shadow:var(--shadow-h);border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
 .card-link{display:flex;align-items:baseline;gap:8px;text-decoration:none;font-weight:600;font-size:1.02rem;line-height:1.3}
-.card-link::after{content:"";position:absolute;inset:0;border-radius:var(--radius)}
 .card-link:hover .card-title{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
 .card-ext{margin-left:auto;color:var(--accent);font-size:.9rem;transition:transform .18s}
 .card:hover .card-ext{transform:translate(2px,-2px)}
@@ -105,7 +101,7 @@ footer a{color:var(--text)}
   .topbar-inner{padding:10px 14px;gap:8px}
   .brand span{display:none}
   .layout{padding:0 14px 48px}
-  .cat-head{padding:18px 16px 4px}
+  .cat-head{padding:18px 16px 18px}
   .cat > .collapsible{padding:4px 16px 16px}
   .cat-blurb{margin-left:0}
   .cat-name{font-size:1.2rem}
