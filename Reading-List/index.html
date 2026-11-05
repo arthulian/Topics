@@ -647,7 +647,7 @@ var CVS=(function(){
       if(!ws.length){list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;conH.hidden=conList.hidden=conMore.hidden=true;conList.innerHTML="";status.textContent="";return;}
     if(ws.length)renderConcepts(ws);else{conH.hidden=conList.hidden=conMore.hidden=true;}
     var r=search(ARTS,input.value),shown=showAll?r:r.slice(0,LIMIT);
-    status.textContent=r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length)":"");
+    status.textContent=r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":"");
     list.hidden=false;resH.hidden=!ws.length;resH.textContent="Articles — "+r.length;
     list.innerHTML=shown.length?shown.map(function(x){return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a>'+(x.inTitle?'<span class="cvs-tag">in title</span>':'')+'<p>'+snippet(x.a,ws)+'</p></li>';}).join(""):'<li><p>No linked article contains all of those words.</p></li>';
     more.hidden=!(r.length>shown.length);more.textContent="Show all "+r.length+" results";
