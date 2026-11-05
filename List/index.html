@@ -928,7 +928,7 @@ var CVS=(function(){
       return;
     }
     if(!ws.length){list.hidden=true;list.innerHTML="";resH.hidden=true;conH.hidden=conList.hidden=conMore.hidden=true;conList.innerHTML="";more.hidden=true;status.textContent="";return;}
-      (ws.length)renderConcepts(ws);else{conH.hidden=conList.hidden=conMore.hidden=true;}
+if      (ws.length)renderConcepts(ws);else{conH.hidden=conList.hidden=conMore.hidden=true;}
     var r=search(ARTS,input.value),shown=showAll?r:r.slice(0,LIMIT);
     status.textContent=r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":""));
     list.hidden=false;resH.hidden=!ws.length;resH.textContent="Articles — "+r.length;
