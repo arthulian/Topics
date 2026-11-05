@@ -529,7 +529,13 @@ var CVS=(function(){
   "use strict";
   function esc(s){return s.replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
   function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
-  function terms(q){var seen={},out=[];q.toLowerCase().trim().split(/\s+/).forEach(function(w){if(w&&!seen[w]){seen[w]=1;out.push(w);}});return out;}
+  /* Stopwords never match or highlight on their own; they only count inside a whole-phrase match */
+  var STOP={};("a an the and or nor but so yet of in on at to for by with from as into onto over under about above below between among through during before after against without within upon via than that this these those it its is are was were be been being am do does did has have had not no i me my we us our you your he him his she her they them their what which who whom whose if then there here when where why how all any each also very just can could will would shall should may might must").split(" ").forEach(function(w){STOP[w]=1;});
+  var PH=null;
+  function phraseOf(q){var w=q.toLowerCase().trim().split(/\s+/).filter(Boolean);return w.length>1?new RegExp("(?<![\\p{L}\\p{N}])"+w.map(escRe).join("\\s+")+"(?![\\p{L}\\p{N}])","iu"):null;}
+  function terms(q){var seen={},out=[];PH=null;q.toLowerCase().trim().split(/\s+/).forEach(function(w){if(w&&!STOP[w]&&!seen[w]){seen[w]=1;out.push(w);}});if(out.length)PH=phraseOf(q);return out;}
+  function onlyStop(q){return q.trim()!==""&&!terms(q).length;}
+  function mkRe(ws){var alts=ws.map(escRe).sort(function(x,y){return y.length-x.length;});if(PH)alts.unshift(PH.source.replace(/^\(\?<!\[\\p\{L\}\\p\{N\}\]\)/,"").replace(/\(\?!\[\\p\{L\}\\p\{N\}\]\)$/,""));return new RegExp("(?<![\\p{L}\\p{N}])("+alts.join("|")+")","giu");}
   function wordRe(w,f){return new RegExp("(?<![\\p{L}\\p{N}])"+escRe(w),f||"iu");}
   function count(re,s){var m=s.match(new RegExp(re.source,"giu"));return m?m.length:0;}
   function byTitle(x,y){return x.a.title.localeCompare(y.a.title);}
@@ -537,10 +543,10 @@ var CVS=(function(){
     var ws=terms(q),res=[];
     if(!ws.length)return arts.map(function(a){return{a:a,inTitle:false,score:0};}).sort(byTitle);
     arts.forEach(function(a){
-      var hay=a.title+"\n"+a.summary+"\n"+a.text,ok=true,tHits=0,hits=0;
-      for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);if(!re.test(hay)){ok=false;break;}
+      var hay=a.title+"\n"+a.summary+"\n"+a.text,ok=true,tHits=0,hits=0,ph=!!(PH&&PH.test(hay));
+      for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);if(!re.test(hay)){ok=false;if(!ph)break;continue;}
         if(re.test(a.title))tHits++;hits+=count(re,a.summary)*3+count(re,a.text);}
-      if(ok)res.push({a:a,inTitle:tHits>0,score:tHits*100000+hits});
+      if(ok||ph)res.push({a:a,inTitle:tHits>0,score:(ph?1e9:0)+tHits*100000+hits});
     });
     return res.sort(function(x,y){return y.score-x.score||byTitle(x,y);});
   }
@@ -548,13 +554,14 @@ var CVS=(function(){
     len=len||240;
     if(!ws.length)return esc(a.summary.length>len?a.summary.slice(0,len).replace(/\s+\S*$/,"")+"…":a.summary);
     var src=null,pos=-1;
-    [a.summary,a.text].some(function(s){ws.forEach(function(w){var m=wordRe(w).exec(s);if(m&&(pos<0||m.index<pos)){src=s;pos=m.index;}});return !!src;});
+    if(PH)[a.summary,a.text].some(function(s){var m=PH.exec(s);if(m){src=s;pos=m.index;}return !!src;});
+    if(!src)[a.summary,a.text].some(function(s){ws.forEach(function(w){var m=wordRe(w).exec(s);if(m&&(pos<0||m.index<pos)){src=s;pos=m.index;}});return !!src;});
     if(!src){src=a.summary;pos=0;}
     var st=Math.max(0,pos-80),en=Math.min(src.length,st+len);
     if(st>0)st=src.indexOf(" ",st)+1||st;
     if(en<src.length){var sp=src.lastIndexOf(" ",en);if(sp>pos)en=sp;}
     var piece=src.slice(st,en).replace(/\n+/g," ");
-    var re=new RegExp("(?<![\\p{L}\\p{N}])("+ws.map(escRe).sort(function(x,y){return y.length-x.length;}).join("|")+")","giu");
+    var re=mkRe(ws);
     var out="",last=0,m;
     while((m=re.exec(piece))){out+=esc(piece.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
     out+=esc(piece.slice(last));
@@ -564,7 +571,7 @@ var CVS=(function(){
   var CATN={};CATS.forEach(function(c){CATN[c[0]]=c[1];});
   function hl(s,ws){
     if(!ws.length)return esc(s);
-    var re=new RegExp("(?<![\\p{L}\\p{N}])("+ws.map(escRe).sort(function(x,y){return y.length-x.length;}).join("|")+")","giu"),out="",last=0,m;
+    var re=mkRe(ws),out="",last=0,m;
     while((m=re.exec(s))){out+=esc(s.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
     return out+esc(s.slice(last));
   }
@@ -576,9 +583,10 @@ var CVS=(function(){
       CATS.forEach(function(c){
         if(cat!=="all"&&cat!==c[0])return;
         (a[c[0]]||[]).forEach(function(it){
-          var ok=true,sc=0;
+          var ok=true,sc=0,ph=PH?(PH.test(it.name)?2000:(PH.test(it.note)?1000:0)):0;
           for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);
             if(re.test(it.name))sc+=10;else if(re.test(it.note))sc+=1;else if(re.test(a.title))sc+=0.5;else{ok=false;break;}}
+          if(ph){ok=true;sc+=ph;}
           if(ok){items.push({c:c[0],it:it,score:sc});if(sc>aScore)aScore=sc;}
         });
       });
@@ -625,6 +633,10 @@ var CVS=(function(){
   }
   function render(){
     if(!ARTS)return;
+    if(onlyStop(input.value)){
+      list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
+      conH.hidden=conMore.hidden=true;conList.hidden=false;conList.innerHTML='<li><p>No results.</p></li>';
+      status.textContent="0 results";return;}
     var ws=terms(input.value);
     if(cat!=="all"){
       list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
