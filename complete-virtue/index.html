@@ -360,12 +360,12 @@ document.getElementById('theme').addEventListener('click',()=>{const d=document.
       status.textContent=rc?(ws.length?"Searching "+conH.textContent.split(" — ")[0].toLowerCase()+" only.":"Browsing "+conH.textContent.split(" — ")[0].toLowerCase()+". Type to narrow."):"Could not load the extracted ideas.";
       return;
     }
-    if(!ws.length&&!showAll){clearResults();
-      more.hidden=false;more.textContent="Show all "+ARTS.length+" linked articles";
-      status.textContent=ARTS.length+" linked articles.";return;}
+    if(!ws.length){clearResults();status.textContent="";return;}
+      
+      
     if(ws.length)renderConcepts(ws);else{conH.hidden=conList.hidden=conMore.hidden=true;}
     var r=search(ARTS,input.value),shown=showAll?r:r.slice(0,LIMIT);
-    status.textContent=ws.length?(r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":"")):("All "+ARTS.length+" linked articles");
+    status.textContent=r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":"");
     list.hidden=false;resH.hidden=!ws.length;resH.textContent="Articles — "+r.length;
     list.innerHTML=shown.length?shown.map(function(x){return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a>'+(x.inTitle?'<span class="cvfw-tag">in title</span>':'')+'<p>'+snippet(x.a,ws)+'</p></li>';}).join(""):'<li><p>No linked article contains all of those words.</p></li>';
     more.hidden=!(r.length>shown.length);more.textContent="Show all "+r.length+" results";
