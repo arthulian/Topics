@@ -198,7 +198,7 @@ footer a{color:var(--text)}
           <button type="button" class="cvs-chip" data-cat="theories" aria-pressed="false">Theories</button>
           <button type="button" class="cvs-chip" data-cat="frameworks" aria-pressed="false">Frameworks</button>
         </div>
-        <p class="cvs-status" id="cvStatus" aria-live="polite"></p>
+        <p class="cvs-status" id="cvStatus" aria-live="polite"></p><p class="cvs-sub" id="cvCardH" hidden>Reading list</p><ul class="cvs-res" id="cvCards" hidden></ul><p class="cvs-sub" id="cvCardH" hidden>Reading list</p><ul class="cvs-res" id="cvCards" hidden></ul>
         <p class="cvs-sub" id="cvConH" hidden>Named ideas</p>
         <ul class="cvs-res" id="cvCon" hidden></ul>
         <button class="btn cvs-more" type="button" id="cvConMore" hidden>Show all</button>
@@ -599,7 +599,7 @@ var CVS=(function(){
   if(typeof document==="undefined")return api;
 
   var input=document.getElementById("cvq"),list=document.getElementById("cvRes"),status=document.getElementById("cvStatus"),more=document.getElementById("cvMore");
-  var conList=document.getElementById("cvCon"),conH=document.getElementById("cvConH"),conMore=document.getElementById("cvConMore"),resH=document.getElementById("cvResH"),chips=document.getElementById("cvChips");
+  var conList=document.getElementById("cvCon"),conH=document.getElementById("cvConH"),conMore=document.getElementById("cvConMore"),resH=document.getElementById("cvResH"),chips=document.getElementById("cvChips");/* Reading-list sub-header search, analogous to the Complete Virtue framework subheader match: each of the 22 article cards on this page is a sub-header and its description is the definition. When the searched word matches one of the article titles, that title is shown with its definition and the rest are hidden. */var CARDS=Array.prototype.map.call(document.querySelectorAll("main .cards .card"),function(li){var a=li.querySelector(".card-link"),t=li.querySelector(".card-title"),d=li.querySelector(".card-desc");return{title:t?t.textContent.trim():"",desc:d?d.textContent.trim():"",url:a?a.getAttribute("href"):""};});var cardH=document.getElementById("cvCardH"),cardList=document.getElementById("cvCards");function renderCards(){var q=input.value.trim().toLowerCase(),ws=terms(input.value);var hits=q?CARDS.filter(function(c){return c.title.toLowerCase()===q;}):[];if(!hits.length){cardH.hidden=true;cardList.hidden=true;cardList.innerHTML="";return;}cardH.hidden=false;cardList.hidden=false;cardH.textContent="Reading list — "+hits.length;cardList.innerHTML=hits.map(function(c){return '<li><a href="'+esc(c.url)+'" target="_blank" rel="noopener">'+hl(c.title,ws)+'</a><p>'+esc(c.desc)+'</p></li>';}).join("");}
   if(!input)return api;
   var ARTS=null,CON=null,loading=null,LIMIT=25,GLIMIT=8,showAll=false,showAllCon=false,cat="all",timer;
   function load(){
@@ -631,7 +631,7 @@ var CVS=(function(){
     conMore.hidden=!(r.groups.length>g.length);conMore.textContent="Show all "+r.groups.length+" articles";
     return r;
   }
-  function render(){
+  function render(){renderCards();
     if(!ARTS)return;
     if(onlyStop(input.value)){
       list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
