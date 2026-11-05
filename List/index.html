@@ -308,6 +308,48 @@
       .controls { display: none; }
       .collapsible[hidden] { display: block; }
     }
+/* Grokipedia linked-article search (same as Wikipedia page) */
+.cvs{--surface:var(--card-bg);--surface-2:var(--bg-color);--border:var(--border-color);--text:var(--text-main);--muted:var(--text-muted);--radius:12px;--serif:Georgia,"Times New Roman",serif}
+.cvs-res a{color:var(--primary)}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.cvs{--accent:#0f766e;background:var(--surface);border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);box-shadow:var(--shadow);margin-bottom:26px;overflow:hidden;position:relative}
+[data-theme="dark"] .cvs{--accent:#5eead4}
+.cvs::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--accent)}
+.cvs-head{padding:20px 22px 4px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent)}
+.cvs-head h2{margin:0;font-family:var(--serif);font-size:1.45rem;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.cvs-head p{margin:6px 0 0;color:var(--muted);font-size:.93rem}
+.cvs-head p a{color:var(--accent);font-weight:600}
+.cvs-body{padding:12px 22px 18px}
+.cvs-field{position:relative}
+.cvs-field svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);pointer-events:none}
+.cvs-field input{width:100%;font:inherit;font-size:16px;padding:10px 14px 10px 36px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);box-shadow:var(--shadow);-webkit-appearance:none;appearance:none}
+.cvs-field input::placeholder{color:var(--muted)}
+.cvs-field input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.cvs-status{margin:8px 2px 0;color:var(--muted);font-size:.84rem;font-weight:500}
+.cvs-res{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.cvs-res[hidden],.cvs-more[hidden]{display:none}
+.cvs-res li{position:relative;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px 12px 18px;overflow-wrap:anywhere}
+.cvs-res li::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--accent);opacity:.75}
+.cvs-res a{font-weight:600;font-size:1.02rem;line-height:1.3;text-decoration:none}
+.cvs-res a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+.cvs-tag{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);vertical-align:2px;white-space:nowrap}
+.cvs-res p{margin:6px 0 0;color:var(--muted);font-size:.9rem;line-height:1.5}
+.cvs-more{margin-top:12px}
+.cvs-chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+.cvs-chip{font:inherit;font-size:.8rem;font-weight:600;padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);cursor:pointer;line-height:1.2}
+.cvs-chip:hover{border-color:var(--accent);color:var(--text)}
+.cvs-chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.cvs-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cvs-chip .n{font-weight:500;opacity:.75;margin-left:4px}
+.cvs-sub{margin:16px 2px 0;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cvs-sub[hidden]{display:none}
+.cvs-items{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+.cvs-res .cvs-items li{background:none;border:0;border-radius:0;padding:0;font-size:.9rem;line-height:1.45;color:var(--muted)}
+.cvs-res .cvs-items li::before{content:none}
+.cvs-items b{color:var(--text);font-weight:600}
+.cvs-items .cvs-tag{margin:0 6px 0 0;vertical-align:1px}
+.cvs-res mark,.cvs-items mark{background:color-mix(in srgb,var(--accent) 28%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+@media (max-width:560px){.cvs-head{padding:18px 16px 4px}.cvs-head h2{font-size:1.2rem}.cvs-body{padding:10px 16px 16px}}
   </style>
 <style id="topics-nav-style">
 #topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50}
@@ -326,9 +368,35 @@
       <button class="theme-toggle" id="themeToggle">Light Mode</button>
     </header>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search concepts, topics, or terms..." />
-    </div>
+
+    <section class="cvs" id="cv-search">
+      <div class="cvs-head">
+        </div>
+      <div class="cvs-body">
+        <div class="cvs-field" role="search">
+          <label for="cvq" class="visually-hidden">Search</label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="cvq" type="search" placeholder="e.g. fear, self, virtue" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="cvStatus">
+        </div>
+        <div class="cvs-chips" id="cvChips" role="group" aria-label="Filter by category">
+          <button type="button" class="cvs-chip" data-cat="all" aria-pressed="true">All</button>
+          <button type="button" class="cvs-chip" data-cat="coined_terms" aria-pressed="false">Coined terms</button>
+          <button type="button" class="cvs-chip" data-cat="concepts" aria-pressed="false">Concepts</button>
+          <button type="button" class="cvs-chip" data-cat="axioms" aria-pressed="false">Axioms</button>
+          <button type="button" class="cvs-chip" data-cat="principles" aria-pressed="false">Principles</button>
+          <button type="button" class="cvs-chip" data-cat="methods" aria-pressed="false">Methods</button>
+          <button type="button" class="cvs-chip" data-cat="theories" aria-pressed="false">Theories</button>
+          <button type="button" class="cvs-chip" data-cat="frameworks" aria-pressed="false">Frameworks</button>
+        </div>
+        <p class="cvs-status" id="cvStatus" aria-live="polite"></p>
+        <p class="cvs-sub" id="cvConH" hidden>Named ideas</p>
+        <ul class="cvs-res" id="cvCon" hidden></ul>
+        <button class="btn cvs-more" type="button" id="cvConMore" hidden>Show all</button>
+        <p class="cvs-sub" id="cvResH" hidden>Articles</p>
+        <ul class="cvs-res" id="cvRes" hidden></ul>
+        <button class="btn cvs-more" type="button" id="cvMore" hidden>Show all results</button>
+      </div>
+    </section>
 
     <div class="controls">
       <button class="btn" type="button" id="expandAll">Expand all</button>
@@ -715,7 +783,7 @@
       });
     }
 
-    searchInput.addEventListener('input', filterContent);
+    if (searchInput) searchInput.addEventListener('input', filterContent);
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -738,5 +806,154 @@
       }
     });
   </script>
+<script>
+/* Grokipedia linked-article search (data loads on first use) */
+var CVS=(function(){
+  "use strict";
+  function esc(s){return s.replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+  function terms(q){var seen={},out=[];q.toLowerCase().trim().split(/\s+/).forEach(function(w){if(w&&!seen[w]){seen[w]=1;out.push(w);}});return out;}
+  function wordRe(w,f){return new RegExp("(?<![\\p{L}\\p{N}])"+escRe(w),f||"iu");}
+  function count(re,s){var m=s.match(new RegExp(re.source,"giu"));return m?m.length:0;}
+  function byTitle(x,y){return x.a.title.localeCompare(y.a.title);}
+  function search(arts,q){
+    var ws=terms(q),res=[];
+    if(!ws.length)return arts.map(function(a){return{a:a,inTitle:false,score:0};}).sort(byTitle);
+    arts.forEach(function(a){
+      var hay=a.title+"\n"+a.summary+"\n"+a.text,ok=true,tHits=0,hits=0;
+      for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);if(!re.test(hay)){ok=false;break;}
+        if(re.test(a.title))tHits++;hits+=count(re,a.summary)*3+count(re,a.text);}
+      if(ok)res.push({a:a,inTitle:tHits>0,score:tHits*100000+hits});
+    });
+    return res.sort(function(x,y){return y.score-x.score||byTitle(x,y);});
+  }
+  function snippet(a,ws,len){
+    len=len||240;
+    if(!ws.length)return esc(a.summary.length>len?a.summary.slice(0,len).replace(/\s+\S*$/,"")+"…":a.summary);
+    var src=null,pos=-1;
+    [a.summary,a.text].some(function(s){ws.forEach(function(w){var m=wordRe(w).exec(s);if(m&&(pos<0||m.index<pos)){src=s;pos=m.index;}});return !!src;});
+    if(!src){src=a.summary;pos=0;}
+    var st=Math.max(0,pos-80),en=Math.min(src.length,st+len);
+    if(st>0)st=src.indexOf(" ",st)+1||st;
+    if(en<src.length){var sp=src.lastIndexOf(" ",en);if(sp>pos)en=sp;}
+    var piece=src.slice(st,en).replace(/\n+/g," ");
+    var re=new RegExp("(?<![\\p{L}\\p{N}])("+ws.map(escRe).sort(function(x,y){return y.length-x.length;}).join("|")+")","giu");
+    var out="",last=0,m;
+    while((m=re.exec(piece))){out+=esc(piece.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
+    out+=esc(piece.slice(last));
+    return (st>0?"…":"")+out+(en<src.length?"…":"");
+  }
+  var CATS=[["coined_terms","Coined term"],["concepts","Concept"],["axioms","Axiom"],["principles","Principle"],["methods","Method"],["theories","Theory"],["frameworks","Framework"]];
+  var CATN={};CATS.forEach(function(c){CATN[c[0]]=c[1];});
+  function hl(s,ws){
+    if(!ws.length)return esc(s);
+    var re=new RegExp("(?<![\\p{L}\\p{N}])("+ws.map(escRe).sort(function(x,y){return y.length-x.length;}).join("|")+")","giu"),out="",last=0,m;
+    while((m=re.exec(s))){out+=esc(s.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
+    return out+esc(s.slice(last));
+  }
+  /* Concept search: every word must start a word in the item's name or note (or the article title) */
+  function searchConcepts(con,q,cat){
+    var ws=terms(q),groups=[],n=0;
+    con.forEach(function(a){
+      var items=[],aScore=0;
+      CATS.forEach(function(c){
+        if(cat!=="all"&&cat!==c[0])return;
+        (a[c[0]]||[]).forEach(function(it){
+          var ok=true,sc=0;
+          for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);
+            if(re.test(it.name))sc+=10;else if(re.test(it.note))sc+=1;else if(re.test(a.title))sc+=0.5;else{ok=false;break;}}
+          if(ok){items.push({c:c[0],it:it,score:sc});if(sc>aScore)aScore=sc;}
+        });
+      });
+      if(items.length){items.sort(function(x,y){return y.score-x.score;});groups.push({a:a,items:items,score:aScore});n+=items.length;}
+    });
+    groups.sort(function(x,y){return ws.length?(y.score-x.score||x.a.title.localeCompare(y.a.title)):x.a.title.localeCompare(y.a.title);});
+    return {groups:groups,n:n};
+  }
+  var api={search:search,snippet:snippet,terms:terms,searchConcepts:searchConcepts};
+  if(typeof document==="undefined")return api;
+
+  var input=document.getElementById("cvq"),list=document.getElementById("cvRes"),status=document.getElementById("cvStatus"),more=document.getElementById("cvMore");
+  var conList=document.getElementById("cvCon"),conH=document.getElementById("cvConH"),conMore=document.getElementById("cvConMore"),resH=document.getElementById("cvResH"),chips=document.getElementById("cvChips");
+  if(!input)return api;
+  var ARTS=null,CON=null,loading=null,LIMIT=25,GLIMIT=8,showAll=false,showAllCon=false,cat="all",timer;
+  function load(){
+    if(!loading){status.textContent="Loading articles…";
+      loading=Promise.all([
+        fetch("gp-articles.json").then(function(r){if(!r.ok)throw 0;return r.json();}),
+        fetch("gp-concepts.json").then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;})
+      ]).then(function(d){ARTS=d[0];CON=d[1];countChips();render();})
+        .catch(function(){loading=null;status.textContent="Could not load the article index. Please try again.";});}
+    return loading;
+  }
+  function countChips(){
+    if(!CON)return;
+    Array.prototype.forEach.call(chips.querySelectorAll(".cvs-chip"),function(b){
+      var k=b.getAttribute("data-cat"),n=0;
+      CON.forEach(function(a){CATS.forEach(function(c){if(k==="all"||k===c[0])n+=(a[c[0]]||[]).length;});});
+      if(!b.querySelector(".n"))b.insertAdjacentHTML("beforeend",'<span class="n">'+n+'</span>');
+    });
+  }
+  function renderConcepts(ws){
+    if(!CON){conH.hidden=conList.hidden=conMore.hidden=true;return null;}
+    var r=searchConcepts(CON,input.value,cat),g=showAllCon?r.groups:r.groups.slice(0,GLIMIT);
+    conH.hidden=false;conList.hidden=false;
+    conH.textContent=(cat==="all"?"Named ideas":CATS.filter(function(c){return c[0]===cat;})[0][1].replace(/y$/,"ie")+"s")+" — "+r.n+" in "+r.groups.length+" article"+(r.groups.length===1?"":"s");
+    conList.innerHTML=g.length?g.map(function(x){
+      return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a><ul class="cvs-items">'+
+        x.items.map(function(i){return '<li><span class="cvs-tag">'+CATN[i.c]+'</span><b>'+hl(i.it.name,ws)+'</b>'+(i.it.note?' — '+hl(i.it.note,ws):'')+'</li>';}).join("")+'</ul></li>';
+    }).join(""):'<li><p>No '+(cat==="all"?"named ideas":esc(conH.textContent.split(" — ")[0].toLowerCase()))+' match those words.</p></li>';
+    conMore.hidden=!(r.groups.length>g.length);conMore.textContent="Show all "+r.groups.length+" articles";
+    return r;
+  }
+  function render(){
+    if(!ARTS)return;
+    var ws=terms(input.value);
+    if(cat!=="all"){
+      list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
+      var rc=renderConcepts(ws);
+      status.textContent=rc?(ws.length?"Searching "+conH.textContent.split(" — ")[0].toLowerCase()+" only.":"Browsing "+conH.textContent.split(" — ")[0].toLowerCase()+". Type to narrow."):"Could not load the extracted ideas.";
+      return;
+    }
+    if(!ws.length&&!showAll){list.hidden=true;list.innerHTML="";resH.hidden=true;conH.hidden=conList.hidden=conMore.hidden=true;conList.innerHTML="";
+      more.hidden=false;more.textContent="Show all "+ARTS.length+" linked articles";
+      status.textContent=ARTS.length+" linked articles. Type a word to search them, or pick a category.";return;}
+    if(ws.length)renderConcepts(ws);else{conH.hidden=conList.hidden=conMore.hidden=true;}
+    var r=search(ARTS,input.value),shown=showAll?r:r.slice(0,LIMIT);
+    status.textContent=ws.length?(r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":"")):("All "+ARTS.length+" linked articles");
+    list.hidden=false;resH.hidden=!ws.length;resH.textContent="Articles — "+r.length;
+    list.innerHTML=shown.length?shown.map(function(x){return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a>'+(x.inTitle?'<span class="cvs-tag">in title</span>':'')+'<p>'+snippet(x.a,ws)+'</p></li>';}).join(""):'<li><p>No linked article contains all of those words.</p></li>';
+    more.hidden=!(r.length>shown.length);more.textContent="Show all "+r.length+" results";
+  }
+  function setCat(k){
+    cat=k;showAllCon=false;
+    Array.prototype.forEach.call(chips.querySelectorAll(".cvs-chip"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-cat")===k?"true":"false");});
+  }
+  function syncUrl(){
+    try{var u=new URL(location.href),v=input.value.trim();
+      if(v){u.searchParams.set("cvq",v);}else u.searchParams.delete("cvq");
+      if(cat!=="all")u.searchParams.set("cvc",cat);else u.searchParams.delete("cvc");
+      if(v||cat!=="all")u.hash="cv-search";
+      history.replaceState(null,"",u);}catch(e){}
+  }
+  input.addEventListener("focus",load,{once:true});
+  input.addEventListener("input",function(){showAll=false;showAllCon=false;load();clearTimeout(timer);timer=setTimeout(function(){render();syncUrl();},120);});
+  input.addEventListener("keydown",function(e){if(e.key==="Escape"){input.value="";showAll=false;showAllCon=false;render();syncUrl();}});
+  more.addEventListener("click",function(){showAll=true;render();});
+  conMore.addEventListener("click",function(){showAllCon=true;render();});
+  chips.addEventListener("click",function(e){var b=e.target.closest(".cvs-chip");if(!b)return;setCat(b.getAttribute("data-cat"));load().then(function(){render();syncUrl();});if(ARTS){render();syncUrl();}});
+
+  /* Deep links: ?cvq=fear&cvc=principles#cv-search  or  #cv-search?q=fear&c=principles */
+  var q0=null,c0=null;try{var sp=new URLSearchParams(location.search);q0=sp.get("cvq");c0=sp.get("cvc");}catch(e){}
+  var hm=/^#cv-search\?(.*)$/.exec(location.hash);
+  if(hm){try{var hp=new URLSearchParams(hm[1]);q0=hp.get("q")||q0;c0=hp.get("c")||c0;}catch(e){}}
+  if(c0&&CATN[c0]){setCat(c0);}
+  if(q0){input.value=q0;}
+  if(q0||(c0&&CATN[c0]))load();
+  if(hm){var sec=document.getElementById("cv-search");requestAnimationFrame(function(){sec.scrollIntoView();});}
+  return api;
+})();
+if(typeof module!=="undefined")module.exports=CVS;
+</script>
 </body>
 </html>
