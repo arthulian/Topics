@@ -89,6 +89,23 @@ footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px}
 .cvfw-res .cvfw-items li{background:none;border:0;border-radius:0;padding:0;color:var(--muted);font-size:14px;line-height:1.45}
 .cvfw-items b{color:var(--text);font-weight:600}
 .cvfw-items .cvfw-tag{margin:0 6px 0 0}
+mark.fw-hit{background:#fde047;color:#111;border-radius:3px;padding:0 1px;scroll-margin-top:90px}
+[data-theme=dark] mark.fw-hit{background:#facc15;color:#121216}
+mark.fw-hit.fw-cur{outline:2px solid var(--cvfw-accent,#1d4ed8);outline-offset:1px}
+.cvfw-fw{margin:14px 0 0;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid #eab308;border-radius:10px;padding:10px 14px}
+.cvfw-fw[hidden]{display:none}
+.fw-hide{display:none!important}
+.fw-only{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 22px;margin:0 0 22px}
+.fw-only[hidden]{display:none}
+.fw-only{display:grid;gap:10px}
+.fw-only p{margin:0;line-height:1.55}
+.fw-only .fw-h2{font:650 20px/1.25 var(--serif)}
+.fw-only .fw-h3{font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cvfw-fw ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px;max-height:260px;overflow:auto}
+.cvfw-fw li button{all:unset;cursor:pointer;display:block;font-size:14px;line-height:1.45;color:var(--text);overflow-wrap:anywhere}
+.cvfw-fw li button:hover,.cvfw-fw li button:focus-visible{text-decoration:underline;text-underline-offset:3px}
+.cvfw-fw .sec{display:block;font:600 11px var(--sans);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.cvfw-fw mark{background:color-mix(in srgb,#eab308 40%,transparent);color:inherit;border-radius:3px;padding:0 1px}
 .cvfw-res mark,.cvfw-items mark{background:color-mix(in srgb,var(--cvfw-accent) 28%,transparent);color:inherit;border-radius:3px;padding:0 1px}
 @media (max-width:600px){.cvfw h2{padding:16px 16px 0;font-size:20px}.cvfw-body{padding:12px 16px 16px}}
 @media print{.cvfw{display:none}}
@@ -230,6 +247,45 @@ document.getElementById('theme').addEventListener('click',()=>{const d=document.
     out+=esc(piece.slice(last));
     return (st>0?"…":"")+out+(en<src.length?"…":"");
   }
+
+  /* Highlight searched words inside the framework body itself */
+  var fwBox=document.createElement("div");fwBox.className="cvfw-fw";fwBox.id="cvfw-fw";fwBox.hidden=true;fwBox.setAttribute("aria-live","polite");
+  conH.parentNode.insertBefore(fwBox,conH);
+  var fwRoot=document.querySelector("main.wrap"),fwWidget=document.getElementById("cvfw-search");
+  /* While a search is active, the four framework sections are hidden and replaced by a plain list of only the sentences that contain a hit */
+  var fwOnly=document.createElement("div");fwOnly.className="fw-only";fwOnly.id="fw-only";fwOnly.hidden=true;
+  if(panels.length)panels[0].parentNode.insertBefore(fwOnly,panels[0]);
+  function fwClear(){
+    panels.forEach(function(p){p.classList.remove("fw-hide");if(!p.className)p.removeAttribute("class");});
+    fwOnly.hidden=true;fwOnly.innerHTML="";
+    fwBox.hidden=true;fwBox.innerHTML="";
+  }
+  function fwSentenceList(){
+    var out=[];
+    function sents(el){var c=el.cloneNode(true);Array.prototype.forEach.call(c.querySelectorAll(".step"),function(x){x.remove();});
+      c.textContent.replace(/\s+/g," ").trim().split(/(?<=[.!?])\s+/).forEach(function(t){if(t)out.push({t:t,h:0});});}
+    panels.forEach(function(p){
+      var h2=p.querySelector(".head h2");if(h2)out.push({t:h2.textContent.trim(),h:2});
+      Array.prototype.forEach.call(p.querySelectorAll(".content .card"),function(card){
+        var h3=card.querySelector("h3");if(h3)out.push({t:h3.textContent.trim(),h:3});
+        Array.prototype.forEach.call(card.querySelectorAll("li, p"),sents);
+      });
+    });
+    return out;
+  }
+  function fwApply(ws){
+    fwClear();
+    if(!ws.length||!panels.length)return;
+    var re=new RegExp(mkRe(ws).source+"(?![\\p{L}\\p{N}])","giu"),hits=0,lines=[],nh=0;
+    fwSentenceList().forEach(function(x){var m=x.t.match(re);if(m){hits+=m.length;lines.push(x);if(x.h)nh++;}});
+    var ns=lines.length-nh;
+    fwBox.hidden=false;
+    fwBox.innerHTML='<p class="cvfw-sub" style="margin:0">In the framework: '+hits+' match'+(hits===1?'':'es')+' in '+ns+' sentence'+(ns===1?'':'s')+(nh?' and '+nh+' heading'+(nh===1?'':'s'):'')+'</p>';
+    panels.forEach(function(p){p.classList.add("fw-hide");});
+    fwOnly.hidden=false;
+    function mk(t){var o="",last=0,m;re.lastIndex=0;while((m=re.exec(t))){o+=esc(t.slice(last,m.index))+'<mark class="fw-hit">'+esc(m[0])+'</mark>';last=m.index+m[0].length;}return o+esc(t.slice(last));}
+    fwOnly.innerHTML=lines.length?lines.map(function(x){return x.h?'<p class="fw-h'+x.h+'">'+mk(x.t)+'</p>':'<p class="fw-s">'+mk(x.t)+'</p>';}).join(""):'<p>No sentence in the framework contains those words.</p>';
+  }
   var CATS=[["coined_terms","Coined term"],["concepts","Concept"],["axioms","Axiom"],["principles","Principle"],["methods","Method"],["theories","Theory"],["frameworks","Framework"]];
   var CATN={};CATS.forEach(function(c){CATN[c[0]]=c[1];});
   function hl(s,ws){
@@ -278,6 +334,7 @@ document.getElementById('theme').addEventListener('click',()=>{const d=document.
   function clearResults(){
     list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
     conH.hidden=conList.hidden=conMore.hidden=true;conList.innerHTML="";
+    fwClear();
   }
   function renderConcepts(ws){
     if(!CON){conH.hidden=conList.hidden=conMore.hidden=true;return null;}
@@ -295,6 +352,7 @@ document.getElementById('theme').addEventListener('click',()=>{const d=document.
     if(onlyStop(input.value)){clearResults();conList.hidden=false;conList.innerHTML='<li><p>No results.</p></li>';status.textContent="0 results";return;}
     var ws=terms(input.value),missing=missingWords(ws);
     if(missing.length){clearResults();status.textContent=missingMessage(missing);return;}
+    fwApply(ws);
     if(!ARTS)return;
     if(cat!=="all"){
       list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
