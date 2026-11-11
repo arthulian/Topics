@@ -1,405 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Complete Virtue</title>
-<meta name="description" content="Complete Virtue: a framework for integrity of belief and conduct, emotional regulation, self-concept, and sustainable action.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script>try{var t=localStorage.getItem('topics-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark'}catch(e){}</script>
-<style>
-:root{--bg:#f6f5f2;--bg-grad:#efece6;--surface:#fff;--surface-2:#faf9f7;--text:#1c1b1f;--muted:#57534e;--border:#e4e0d9;
---shadow:0 1px 2px rgba(28,25,23,.06),0 2px 8px rgba(28,25,23,.05);--shadow-h:0 6px 20px rgba(28,25,23,.10),0 2px 6px rgba(28,25,23,.06);
---focus:#2563eb;--radius:14px;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-[data-theme=dark]{--bg:#121216;--bg-grad:#17171d;--surface:#1c1c23;--surface-2:#22222a;--text:#ecebf0;--muted:#a8a6b3;--border:#2f2f3a;--shadow:0 1px 2px rgba(0,0,0,.4);--shadow-h:0 8px 24px rgba(0,0,0,.45);--focus:#93c5fd}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{margin:0;font:16px/1.65 var(--sans);color:var(--text);background:linear-gradient(180deg,var(--bg),var(--bg-grad)) fixed;-webkit-font-smoothing:antialiased}
-a{color:inherit}:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
-.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:12px 24px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.bar .back{font-size:14px;color:var(--muted);text-decoration:none}.bar .back:hover{color:var(--text)}
-.bar .sp{flex:1}
-.btn{font:500 13px var(--sans);color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 14px;cursor:pointer;box-shadow:var(--shadow)}
-.btn:hover{box-shadow:var(--shadow-h)}
-.wrap{max-width:1060px;margin:0 auto;padding:48px 24px 80px}
-header.hero{text-align:center;margin-bottom:36px}
-.hero .eyebrow{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.hero h1{font:650 clamp(40px,7vw,64px)/1.05 var(--serif);margin:10px 0 14px;letter-spacing:-.02em}
-.hero p{color:var(--muted);max-width:620px;margin:0 auto}
-nav.toc{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 40px}
-nav.toc a{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:500;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 14px 6px 6px;box-shadow:var(--shadow)}
-nav.toc a:hover{box-shadow:var(--shadow-h)}
-nav.toc .n{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);font-size:12px}
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden;border-top:4px solid var(--accent)}
-.head{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:14px;padding:20px 24px;cursor:pointer}
-.head:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
-.head .num{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:10px;color:#fff;background:var(--accent);font:650 18px var(--serif)}
-.head h2{flex:1;margin:0;font:650 clamp(20px,3vw,26px)/1.2 var(--serif)}
-.chev{color:var(--muted);transition:transform .25s}
-.head[aria-expanded=false] .chev{transform:rotate(-90deg)}
-.content{display:grid;grid-template-rows:1fr;transition:grid-template-rows .3s ease}
-.panel.closed .content{grid-template-rows:0fr}
-.content>.grid{overflow:hidden}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;padding:0 24px}
-.panel:not(.closed) .grid{padding-bottom:24px}
-.card{background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px}
-.card h3{margin:0 0 8px;font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-[data-theme=dark] .card h3{filter:brightness(1.35)}
-.card ul,.card ol{margin:0;padding-left:20px}.card li{margin:8px 0}.card li::marker{color:var(--accent)}
-.card ol.loop{list-style:none;padding:0;counter-reset:none}
-.card ol.loop li{display:flex;gap:10px;align-items:flex-start}
-.step{flex:none;display:grid;place-items:center;width:24px;height:24px;margin-top:1px;border-radius:50%;font:600 12px var(--sans);color:#fff;background:var(--accent)}
-.loopnote{font-size:13px;color:var(--muted);margin:6px 0 0 34px}
-.gloss h2{font:650 26px var(--serif);margin:40px 0 14px;text-align:center}
-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-th,td{text-align:left;vertical-align:top;padding:14px 18px;border-bottom:1px solid var(--border)}
-tr:last-child th,tr:last-child td{border-bottom:0}
-thead th{background:var(--surface-2);font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-tbody th{font-weight:600;width:32%}
-footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px}
-@media (max-width:600px){.wrap{padding-top:32px}.head{padding:16px}.grid{padding:0 16px;grid-template-columns:1fr}.panel:not(.closed) .grid{padding-bottom:16px}tbody th{width:auto}th,td{display:block;width:100%}tbody th{border-bottom:0;padding-bottom:2px}}
-@media print{.bar,nav.toc{display:none}.panel.closed .content{grid-template-rows:1fr}.panel{break-inside:avoid;box-shadow:none}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
-.cvfw{--cvfw-accent:#1d4ed8;background:var(--surface);border:1px solid var(--border);border-top:4px solid var(--cvfw-accent);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 22px;overflow:hidden}
-[data-theme=dark] .cvfw{--cvfw-accent:#93c5fd}
-.cvfw h2{margin:0;padding:20px 24px 0;font:650 clamp(20px,3vw,26px)/1.2 var(--serif)}
-.cvfw-body{padding:16px 24px 20px}
-.cvfw-field{position:relative}
-.cvfw-field svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);pointer-events:none}
-.cvfw-field input{width:100%;font:16px/1.4 var(--sans);color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:10px 16px 10px 40px;box-shadow:var(--shadow);-webkit-appearance:none;appearance:none}
-.cvfw-field input::placeholder{color:var(--muted)}
-.cvfw-field input:focus{outline:none;border-color:var(--cvfw-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--cvfw-accent) 22%,transparent)}
-.cvfw-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
-.cvfw-chip{font:500 13px var(--sans);color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;line-height:1.2}
-.cvfw-chip:hover{color:var(--text);border-color:var(--cvfw-accent)}
-.cvfw-chip[aria-pressed=true]{background:var(--cvfw-accent);border-color:var(--cvfw-accent);color:#fff}
-[data-theme=dark] .cvfw-chip[aria-pressed=true]{color:#121216}
-.cvfw-chip .n{font-weight:500;opacity:.75;margin-left:4px}
-.cvfw-status{margin:10px 2px 0;min-height:1.2em;color:var(--muted);font:500 13px var(--sans)}
-.cvfw-sub{margin:16px 2px 0;font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.cvfw-sub[hidden],.cvfw-res[hidden],.cvfw-more[hidden]{display:none}
-.cvfw-res{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
-.cvfw-res>li{position:relative;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--cvfw-accent);border-radius:10px;padding:12px 16px;overflow-wrap:anywhere}
-.cvfw-res a{font-weight:600;text-decoration:none}
-.cvfw-res a:hover{text-decoration:underline;text-underline-offset:3px}
-.cvfw-tag{display:inline-block;margin-left:8px;font:600 11px var(--sans);padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--cvfw-accent) 16%,transparent);vertical-align:2px}
-.cvfw-res p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
-.cvfw-more{margin-top:12px}
-.cvfw-items{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
-.cvfw-res .cvfw-items li{background:none;border:0;border-radius:0;padding:0;color:var(--muted);font-size:14px;line-height:1.45}
-.cvfw-items b{color:var(--text);font-weight:600}
-.cvfw-items .cvfw-tag{margin:0 6px 0 0}
-mark.fw-hit{background:#fde047;color:#111;border-radius:3px;padding:0 1px;scroll-margin-top:90px}
-[data-theme=dark] mark.fw-hit{background:#facc15;color:#121216}
-mark.fw-hit.fw-cur{outline:2px solid var(--cvfw-accent,#1d4ed8);outline-offset:1px}
-.cvfw-fw{margin:14px 0 0;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid #eab308;border-radius:10px;padding:10px 14px}
-.cvfw-fw[hidden]{display:none}
-.fw-hide{display:none!important}
-.fw-only{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 22px;margin:0 0 22px}
-.fw-only[hidden]{display:none}
-.fw-only{display:grid;gap:10px}
-.fw-only p{margin:0;line-height:1.55}
-.fw-only .fw-h2{font:650 20px/1.25 var(--serif)}
-.fw-only .fw-h3{font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.cvfw-fw ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px;max-height:260px;overflow:auto}
-.cvfw-fw li button{all:unset;cursor:pointer;display:block;font-size:14px;line-height:1.45;color:var(--text);overflow-wrap:anywhere}
-.cvfw-fw li button:hover,.cvfw-fw li button:focus-visible{text-decoration:underline;text-underline-offset:3px}
-.cvfw-fw .sec{display:block;font:600 11px var(--sans);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
-.cvfw-fw mark{background:color-mix(in srgb,#eab308 40%,transparent);color:inherit;border-radius:3px;padding:0 1px}
-.cvfw-res mark,.cvfw-items mark{background:color-mix(in srgb,var(--cvfw-accent) 28%,transparent);color:inherit;border-radius:3px;padding:0 1px}
-@media (max-width:600px){.cvfw h2{padding:16px 16px 0;font-size:20px}.cvfw-body{padding:12px 16px 16px}}
-@media print{.cvfw{display:none}}
-</style>
-<style id="topics-nav-style">
-#topics-nav{background:#1f2328;font:500 14px/1.2 system-ui,-apple-system,"Segoe UI",Inter,sans-serif;position:relative;z-index:50}
-#topics-nav .tn-in{max-width:1120px;margin:0 auto;padding:0 1rem;display:flex;align-items:center;gap:.25rem;flex-wrap:wrap;min-height:46px}
-#topics-nav .tn-home{color:#fff;font-weight:700;text-decoration:none;margin-right:.75rem;letter-spacing:.02em}
-#topics-nav a.tn-l{color:#c9d1d9;text-decoration:none;padding:.45rem .7rem;border-radius:6px}
-#topics-nav a.tn-l:hover{background:#30363d;color:#fff}
-#topics-nav a.tn-l[aria-current=page]{background:#fff;color:#1f2328}
-@media (max-width:600px){#topics-nav .tn-in{padding:.4rem .6rem}#topics-nav .tn-home{width:100%;margin:.3rem 0 1.6rem .6rem;padding:.35rem 0}}
-@media print{#topics-nav{display:none}}
-</style></head>
-<body><nav id="topics-nav" aria-label="Internal Links pages"><div class="tn-in"><a class="tn-home" href="../">Internal Links</a><a class="tn-l" href="../Reading-List/">Wikipedia</a><a class="tn-l" href="../List/">Grokipedia</a><a class="tn-l" href="../Ethics-Outline/index.html">Ethics Outline</a><a class="tn-l" href="../complete-virtue/" aria-current="page">Complete Virtue</a></div></nav>
-<div class="bar">
-<a class="back" href="../">&larr; Internal Links</a><span class="sp"></span>
-<button class="btn" id="all">Collapse all</button>
-<button class="btn" id="theme" aria-label="Toggle dark mode">&#9680; Theme</button>
-</div>
-<main class="wrap">
-<header class="hero">
-<div class="eyebrow">A framework for character</div>
-<h1>Complete Virtue</h1>
-</header>
-<section class="cvfw" id="cvfw-search" aria-labelledby="cvfw-h">
-<h2 id="cvfw-h">Search linked articles</h2>
-<div class="cvfw-body">
-<div class="cvfw-field" role="search">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-<input id="cvfw-q" type="search" placeholder="e.g. fear, self, virtue" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search linked articles" aria-describedby="cvfw-status">
-</div>
-<div class="cvfw-chips" id="cvfw-chips" role="group" aria-label="Filter by category">
-<button type="button" class="cvfw-chip" data-cat="all" aria-pressed="true">All</button>
-<button type="button" class="cvfw-chip" data-cat="coined_terms" aria-pressed="false">Coined terms</button>
-<button type="button" class="cvfw-chip" data-cat="concepts" aria-pressed="false">Concepts</button>
-<button type="button" class="cvfw-chip" data-cat="axioms" aria-pressed="false">Axioms</button>
-<button type="button" class="cvfw-chip" data-cat="principles" aria-pressed="false">Principles</button>
-<button type="button" class="cvfw-chip" data-cat="methods" aria-pressed="false">Methods</button>
-<button type="button" class="cvfw-chip" data-cat="theories" aria-pressed="false">Theories</button>
-<button type="button" class="cvfw-chip" data-cat="frameworks" aria-pressed="false">Frameworks</button>
-</div>
-<p class="cvfw-status" id="cvfw-status" aria-live="polite"></p>
-<p class="cvfw-sub" id="cvfw-con-h" hidden>Named ideas</p>
-<ul class="cvfw-res" id="cvfw-con" hidden></ul>
-<button class="btn cvfw-more" type="button" id="cvfw-con-more" hidden>Show all</button>
-<p class="cvfw-sub" id="cvfw-res-h" hidden>Articles</p>
-<ul class="cvfw-res" id="cvfw-res" hidden></ul>
-<button class="btn cvfw-more" type="button" id="cvfw-more" hidden>Show all results</button>
-</div>
-</section>
-<section class="panel" id="s1" style="--accent:#7c3aed">
-<button class="head" aria-expanded="true"><span class="num">1</span><h2>Integrity of Belief and Conduct</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
-<div class="content"><div class="grid"><article class="card"><h3>Belief Evaluation</h3><ul><li>Test each premise against an impartial standard applied proportionally to all, ensuring that there is alignment between each inference and the empirical evidence.</li></ul></article><article class="card"><h3>Conduct Accountability</h3><ul><li>Render to each and all what is due to them (their moral and legal rights) in proportion to their functional agency. Equity (epieikeia) covers irregular cases so that the ordinance is framed to fit the circumstances.</li></ul></article></div></div></section>
-<section class="panel" id="s2" style="--accent:#0891b2">
-<button class="head" aria-expanded="true"><span class="num">2</span><h2>Emotional Regulation</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
-<div class="content"><div class="grid"><article class="card"><h3>Interoceptive Decentering</h3><ul><li>Acknowledge your experiences as they unfold without reacting to them automatically. Psychologically distance yourself from your thoughts and emotions, recognizing how your underlying assumptions and immediate emotional reactions are shaping your appraisal of the situation.</li><li>Inhibit automatic impulses and ingrained habits by stepping outside your internal sensations, in order to make space for a more appropriate behavior that is consistent with your goals.</li><li>Recognize defensive compulsions (caused by fear-of-abandonment) as submissive compliance in disguise.</li></ul></article><article class="card"><h3>Acceptance and Recovery</h3><ul><li>Let go of the pretense of invulnerability to recognize that our interdependence demands mutual cooperation</li><li>Treat planned recovery and rest as essential maintenance needed for sustained performance. In this way the exhaustion stage does not reduce the gains achieved, the body can recover and remain above the original baseline.</li></ul></article><article class="card"><h3>Stress Triage</h3><ul><li>Under acute or overwhelming pressure, set healthy boundaries to disengage. Protecting your personal values from being compromised or violated.</li><li>Under mild or moderate pressure: push your boundaries through controlled exposure techniques to reframe risk as a manageable challenge. The goal should not be too far out of reach but still be slightly more than one can handle. This fosters motivation since the goal is in sight.</li></ul></article></div></div></section>
-<section class="panel" id="s3" style="--accent:#d97706">
-<button class="head" aria-expanded="true"><span class="num">3</span><h2>Self-Concept</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
-<div class="content"><div class="grid"><article class="card"><h3>Self-Worth</h3><ul><li>Your human dignity rests on your capacity for moral excellence; and your integrity is how you honor it.</li><li>Recognize that defensive self-sufficiency is counterdependence (the refusal of attachment or dependency out of fear of vulnerability).</li><li>Develop a growth mindset by viewing setbacks as skill-deficit feedback rather than as personal flaws. Failures don't constitute grounds for self-condemnation.</li></ul></article><article class="card"><h3>Self-Confidence Loop</h3><ol class=loop><li><span class="step">A</span> Internalize achievements (accomplished by your deliberate effort) to cultivate self-belief and strengthen your perseverance.</li><li><span class="step">B</span> Proportion confidence to your actual level of capability.</li><li><span class="step">C</span> Update confidence when new evidence indicates a change in your capabilities.</li><li><span class="step">D</span> Use your confidence (grounded in the accurate appraisal of your capabilities) to take on progressively more challenging tasks.</li></ol></article></div></div></section>
-<section class="panel" id="s4" style="--accent:#16a34a">
-<button class="head" aria-expanded="true"><span class="num">4</span><h2>Sustainable Action</h2><span class="chev" aria-hidden="true">&#9662;</span></button>
-<div class="content"><div class="grid"><article class="card"><h3>Simulation Heuristics</h3><ul><li>Use "even if" simulations to isolate objective facts from false presuppositions (by considering another outcome based on a different path, and if taking that path would avoid undesired outcomes).</li></ul></article><article class="card"><h3>Strategic Focus</h3><ul><li>During cognitive overload, set aside nonessential tasks to refocus on basic needs and prevent future burnout. Recovery from exhaustion is found by doing what is undemanding and joyful. Sleep and physical exercise are the basis of recovery and should be prioritized initially.</li><li>People to overestimate their ability to control events; so avoid this illusion and recognize that some situations are contingent on external forces and are inherently unpredictable.</li><li>Don't become attached to sunk costs or let them influence future decisions.</li></ul></article><article class="card"><h3>Sustainable Perseverance</h3><ul><li>Perseverance is sustained by the mercy of self-compassion (extending compassion to one's self in instances of perceived inadequacy, failure, or general suffering).</li><li>People are inspired by a sense of purpose. Let your underlying purpose (the why) shape your goals and methods (what and how), allowing you to become detached from specific outcomes.</li><li>Build resilience through gradual, controlled exposure to stressors. Increasing the intensity after a successful demonstration of proficiency. Exposed to sufficient stress to develop coping skills, but not so much that it overwhelms you.</li>
-<li>Set goals according to your values and carry them out responsibly, in the service of a meaningful life. Creative hopelessness is a technique used to give up ineffective approaches and facilitate acceptance.</li></ul></article></div></div></section>
-<footer><a href="../">Back to Internal Links</a></footer>
-</main>
-<script>
-const panels=[...document.querySelectorAll('.panel')],allBtn=document.getElementById('all');
-function setP(p,open){p.classList.toggle('closed',!open);p.querySelector('.head').setAttribute('aria-expanded',open)}
-function sync(){allBtn.textContent=panels.every(p=>p.classList.contains('closed'))?'Expand all':'Collapse all'}
-panels.forEach(p=>p.querySelector('.head').addEventListener('click',()=>{setP(p,p.classList.contains('closed'));sync()}));
-allBtn.addEventListener('click',()=>{const open=allBtn.textContent==='Expand all';panels.forEach(p=>setP(p,open));sync()});
-document.querySelectorAll('nav.toc a').forEach(a=>a.addEventListener('click',()=>{const p=document.querySelector(a.getAttribute('href'));if(p&&p.classList.contains('panel'))setP(p,true);sync()}));
-document.getElementById('theme').addEventListener('click',()=>{const d=document.documentElement,n=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('topics-theme',n)}catch(e){}});
-</script>
-<script>
-/* Framework-limited search of Complete Virtue's linked articles. Words are read from this page at load. */
-(function(){
-  "use strict";
-  var input=document.getElementById("cvfw-q");
-  if(!input)return;
-  var list=document.getElementById("cvfw-res"),status=document.getElementById("cvfw-status"),more=document.getElementById("cvfw-more");
-  var conList=document.getElementById("cvfw-con"),conH=document.getElementById("cvfw-con-h"),conMore=document.getElementById("cvfw-con-more"),resH=document.getElementById("cvfw-res-h"),chips=document.getElementById("cvfw-chips");
-  function frameworkText(){
-    var root=document.querySelector("main.wrap");
-    if(!root)return "";
-    var clone=root.cloneNode(true);
-    var widget=clone.querySelector("#cvfw-search");
-    if(widget)widget.remove();
-    return clone.textContent||"";
-  }
-  var FW_TEXT=frameworkText();
-  var FW_WORDS=new Set();
-  var tokenRe=/[\p{L}\p{N}]+/gu,tok;
-  while((tok=tokenRe.exec(FW_TEXT)))FW_WORDS.add(tok[0].toLowerCase());
-  function esc(s){return s.replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
-  /* Stopwords never match or highlight on their own; they only count inside a whole-phrase match */
-  var STOP={};("a an the and or nor but so yet of in on at to for by with from as into onto over under about above below between among through during before after against without within upon via than that this these those it its is are was were be been being am do does did has have had not no i me my we us our you your he him his she her they them their what which who whom whose if then there here when where why how all any each also very just can could will would shall should may might must").split(" ").forEach(function(w){STOP[w]=1;});
-  var PH=null;
-  function phraseOf(q){var w=q.toLowerCase().trim().split(/\s+/).filter(Boolean);return w.length>1?new RegExp("(?<![\\p{L}\\p{N}])"+w.map(escRe).join("\\s+")+"(?![\\p{L}\\p{N}])","iu"):null;}
-  function terms(q){var seen={},out=[];PH=null;q.toLowerCase().trim().split(/\s+/).forEach(function(w){if(w&&!STOP[w]&&!seen[w]){seen[w]=1;out.push(w);}});if(out.length)PH=phraseOf(q);return out;}
-  function onlyStop(q){return q.trim()!==""&&!terms(q).length;}
-  function mkRe(ws){var alts=ws.map(escRe).sort(function(x,y){return y.length-x.length;});if(PH)alts.unshift(PH.source.replace(/^\(\?<!\[\\p\{L\}\\p\{N\}\]\)/,"").replace(/\(\?!\[\\p\{L\}\\p\{N\}\]\)$/,""));return new RegExp("(?<![\\p{L}\\p{N}])("+alts.join("|")+")","giu");}
-  function wordRe(w,f){return new RegExp("(?<![\\p{L}\\p{N}])"+escRe(w),f||"iu");}
-  function inFramework(w){return FW_WORDS.has(w)||wordRe(w).test(FW_TEXT);}
-  function missingWords(ws){return ws.filter(function(w){return !inFramework(w);});}
-  function missingMessage(missing){
-    var quoted=missing.map(function(w){return "“"+w+"”";});
-    var list=quoted.length===1?quoted[0]:quoted.slice(0,-1).join(", ")+" and "+quoted[quoted.length-1];
-    return "No results — "+list+" "+(missing.length===1?"doesn't":"don't")+" appear in Complete Virtue.";
-  }
-  function count(re,s){var m=s.match(new RegExp(re.source,"giu"));return m?m.length:0;}
-  function byTitle(x,y){return x.a.title.localeCompare(y.a.title);}
-  function search(arts,q){
-    var ws=terms(q),res=[];
-    if(!ws.length)return arts.map(function(a){return{a:a,inTitle:false,score:0};}).sort(byTitle);
-    arts.forEach(function(a){
-      var hay=a.title+"\n"+a.summary+"\n"+a.text,ok=true,tHits=0,hits=0,ph=!!(PH&&PH.test(hay));
-      for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);if(!re.test(hay)){ok=false;if(!ph)break;continue;}
-        if(re.test(a.title))tHits++;hits+=count(re,a.summary)*3+count(re,a.text);}
-      if(ok||ph)res.push({a:a,inTitle:tHits>0,score:(ph?1e9:0)+tHits*100000+hits});
-    });
-    return res.sort(function(x,y){return y.score-x.score||byTitle(x,y);});
-  }
-  function snippet(a,ws,len){
-    len=len||240;
-    if(!ws.length)return esc(a.summary.length>len?a.summary.slice(0,len).replace(/\s+\S*$/,"")+"…":a.summary);
-    var src=null,pos=-1;
-    if(PH)[a.summary,a.text].some(function(s){var m=PH.exec(s);if(m){src=s;pos=m.index;}return !!src;});
-    if(!src)[a.summary,a.text].some(function(s){ws.forEach(function(w){var m=wordRe(w).exec(s);if(m&&(pos<0||m.index<pos)){src=s;pos=m.index;}});return !!src;});
-    if(!src){src=a.summary;pos=0;}
-    var st=Math.max(0,pos-80),en=Math.min(src.length,st+len);
-    if(st>0)st=src.indexOf(" ",st)+1||st;
-    if(en<src.length){var sp=src.lastIndexOf(" ",en);if(sp>pos)en=sp;}
-    var piece=src.slice(st,en).replace(/\n+/g," ");
-    var re=mkRe(ws);
-    var out="",last=0,m;
-    while((m=re.exec(piece))){out+=esc(piece.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
-    out+=esc(piece.slice(last));
-    return (st>0?"…":"")+out+(en<src.length?"…":"");
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Generated Psychological Framework Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        blue: { 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a', 950: '#172554' },
+                        purple: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea', 900: '#581c87', 950: '#3b0764' },
+                        orange: { 400: '#fb923c', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12', 950: '#431407' },
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669', 900: '#064e3b', 950: '#022c22' },
+                        darkbg: '#0b0f19',
+                        cardbg: '#111827',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: theme('colors.darkbg');
+            color: #cbd5e1;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.darkbg'); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-  /* Highlight searched words inside the framework body itself */
-  var fwBox=document.createElement("div");fwBox.className="cvfw-fw";fwBox.id="cvfw-fw";fwBox.hidden=true;fwBox.setAttribute("aria-live","polite");
-  conH.parentNode.insertBefore(fwBox,conH);
-  var fwRoot=document.querySelector("main.wrap"),fwWidget=document.getElementById("cvfw-search");
-  /* While a search is active, the four framework sections are hidden and replaced by a plain list of only the sentences that contain a hit */
-  var fwOnly=document.createElement("div");fwOnly.className="fw-only";fwOnly.id="fw-only";fwOnly.hidden=true;
-  conH.parentNode.insertBefore(fwOnly,conH);
-  function fwClear(){
-    panels.forEach(function(p){p.classList.remove("fw-hide");if(!p.className)p.removeAttribute("class");});
-    fwOnly.hidden=true;fwOnly.innerHTML="";
-    fwBox.hidden=true;fwBox.innerHTML="";
-  }
-  function fwSentenceList(){
-    var out=[];
-    function sents(el){var c=el.cloneNode(true);Array.prototype.forEach.call(c.querySelectorAll(".step"),function(x){x.remove();});
-      c.textContent.replace(/\s+/g," ").trim().split(/(?<=[.!?])\s+/).forEach(function(t){if(t)out.push({t:t,h:0});});}
-    panels.forEach(function(p){
-      var h2=p.querySelector(".head h2");if(h2)out.push({t:h2.textContent.trim(),h:2});
-      Array.prototype.forEach.call(p.querySelectorAll(".content .card"),function(card){
-        var h3=card.querySelector("h3");if(h3)out.push({t:h3.textContent.trim(),h:3});
-        Array.prototype.forEach.call(card.querySelectorAll("li, p"),sents);
-      });
-    });
-    return out;
-  }
-  function fwApply(ws){
-    fwClear();
-    if(!ws.length||!panels.length)return;
-    var re=new RegExp(mkRe(ws).source+"(?![\\p{L}\\p{N}])","giu"),hits=0,lines=[],nh=0,msg="",hL=[],sL=[];
-        panels.forEach(function(p){var h2=p.querySelector(".head h2"),t=h2?h2.textContent.trim():"";re.lastIndex=0;if(re.test(t)){hL.push({t:t,h:2});Array.prototype.forEach.call(p.querySelectorAll(".content .card h3"),function(x){hL.push({t:x.textContent.trim(),h:3});});}else Array.prototype.forEach.call(p.querySelectorAll(".content .card"),function(c){var h3=c.querySelector("h3");if(!h3)return;re.lastIndex=0;if(!re.test(h3.textContent.trim()))return;var f="";Array.prototype.forEach.call(c.querySelectorAll("li, p"),function(el){if(f)return;var d=el.cloneNode(true);Array.prototype.forEach.call(d.querySelectorAll(".step"),function(x){x.remove();});var s=d.textContent.replace(/\s+/g," ").trim().split(/(?<=[.!?])\s+/).filter(Boolean);if(s.length)f=s[0];});if(f)sL.push({t:h3.textContent.trim(),h:3},{t:f,h:0});});});
-        if(hL.length){lines=hL;lines.forEach(function(x){var m=x.t.match(re);if(m)hits+=m.length;});msg='In the framework: '+hits+' match'+(hits===1?'':'es')+' in '+lines.length+' heading'+(lines.length===1?'':'s');}else if(sL.length){lines=sL;var nm=lines.length/2;msg='In the framework: '+nm+' subheader match'+(nm===1?'':'es')+': subheader and first sentence shown';}else{fwSentenceList().forEach(function(x){var m=x.t.match(re);if(m){hits+=m.length;lines.push(x);if(x.h)nh++;}});var ns=lines.length-nh;msg='In the framework: '+hits+' match'+(hits===1?'':'es')+' in '+ns+' sentence'+(ns===1?'':'s')+(nh?' and '+nh+' heading'+(nh===1?'':'s'):'');}
-    fwBox.hidden=false;
-    fwBox.innerHTML='<p class="cvfw-sub" style="margin:0">'+msg+'</p>';
-    panels.forEach(function(p){p.classList.add("fw-hide");});
-    fwOnly.hidden=false;
-    function mk(t){var o="",last=0,m;re.lastIndex=0;while((m=re.exec(t))){o+=esc(t.slice(last,m.index))+'<mark class="fw-hit">'+esc(m[0])+'</mark>';last=m.index+m[0].length;}return o+esc(t.slice(last));}
-    fwOnly.innerHTML=lines.length?lines.map(function(x){return x.h?'<p class="fw-h'+x.h+'">'+mk(x.t)+'</p>':'<p class="fw-s">'+mk(x.t)+'</p>';}).join(""):'<p>No sentence in the framework contains those words.</p>';
-  }
-  var CATS=[["coined_terms","Coined term"],["concepts","Concept"],["axioms","Axiom"],["principles","Principle"],["methods","Method"],["theories","Theory"],["frameworks","Framework"]];
-  var CATN={};CATS.forEach(function(c){CATN[c[0]]=c[1];});
-  function hl(s,ws){
-    if(!ws.length)return esc(s);
-    var re=mkRe(ws),out="",last=0,m;
-    while((m=re.exec(s))){out+=esc(s.slice(last,m.index))+"<mark>"+esc(m[0])+"</mark>";last=m.index+m[0].length;}
-    return out+esc(s.slice(last));
-  }
-  function searchConcepts(con,q,cat){
-    var ws=terms(q),groups=[],n=0;
-    con.forEach(function(a){
-      var items=[],aScore=0;
-      CATS.forEach(function(c){
-        if(cat!=="all"&&cat!==c[0])return;
-        (a[c[0]]||[]).forEach(function(it){
-          var ok=true,sc=0,ph=PH?(PH.test(it.name)?2000:(PH.test(it.note)?1000:0)):0;
-          for(var i=0;i<ws.length;i++){var re=wordRe(ws[i]);
-            if(re.test(it.name))sc+=10;else if(re.test(it.note))sc+=1;else if(re.test(a.title))sc+=0.5;else{ok=false;break;}}
-          if(ph){ok=true;sc+=ph;}
-          if(ok){items.push({c:c[0],it:it,score:sc});if(sc>aScore)aScore=sc;}
-        });
-      });
-      if(items.length){items.sort(function(x,y){return y.score-x.score;});groups.push({a:a,items:items,score:aScore});n+=items.length;}
-    });
-    groups.sort(function(x,y){return ws.length?(y.score-x.score||x.a.title.localeCompare(y.a.title)):x.a.title.localeCompare(y.a.title);});
-    return {groups:groups,n:n};
-  }
-  var ARTS=null,CON=null,loading=null,LIMIT=25,GLIMIT=8,showAll=false,showAllCon=false,cat="all",timer;
-  function load(){
-    if(!loading){status.textContent="Loading articles…";
-      loading=Promise.all([
-        fetch("../Reading-List/cv-articles.json").then(function(r){if(!r.ok)throw 0;return r.json();}),
-        fetch("../Reading-List/cv-concepts.json").then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;})
-      ]).then(function(d){ARTS=d[0];CON=d[1];countChips();render();})
-        .catch(function(){loading=null;status.textContent="Could not load the article index. Please try again.";});}
-    return loading;
-  }
-  function countChips(){
-    if(!CON)return;
-    Array.prototype.forEach.call(chips.querySelectorAll(".cvfw-chip"),function(b){
-      var k=b.getAttribute("data-cat"),n=0;
-      CON.forEach(function(a){CATS.forEach(function(c){if(k==="all"||k===c[0])n+=(a[c[0]]||[]).length;});});
-      if(!b.querySelector(".n"))b.insertAdjacentHTML("beforeend",'<span class="n">'+n+'</span>');
-    });
-  }
-  function clearResults(){
-    list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
-    conH.hidden=conList.hidden=conMore.hidden=true;conList.innerHTML="";
-    fwClear();
-  }
-  function renderConcepts(ws){
-    if(!CON){conH.hidden=conList.hidden=conMore.hidden=true;return null;}
-    var r=searchConcepts(CON,input.value,cat),g=showAllCon?r.groups:r.groups.slice(0,GLIMIT);
-    conH.hidden=false;conList.hidden=false;
-    conH.textContent=(cat==="all"?"Named ideas":CATS.filter(function(c){return c[0]===cat;})[0][1].replace(/y$/,"ie")+"s")+" — "+r.n+" in "+r.groups.length+" article"+(r.groups.length===1?"":"s");
-    conList.innerHTML=g.length?g.map(function(x){
-      return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a><ul class="cvfw-items">'+
-        x.items.map(function(i){return '<li><span class="cvfw-tag">'+CATN[i.c]+'</span><b>'+hl(i.it.name,ws)+'</b>'+(i.it.note?' — '+hl(i.it.note,ws):'')+'</li>';}).join("")+'</ul></li>';
-    }).join(""):'<li><p>No '+(cat==="all"?"named ideas":esc(conH.textContent.split(" — ")[0].toLowerCase()))+' match those words.</p></li>';
-    conMore.hidden=!(r.groups.length>g.length);conMore.textContent="Show all "+r.groups.length+" articles";
-    return r;
-  }
-  function render(){
-    if(onlyStop(input.value)){clearResults();conList.hidden=false;conList.innerHTML='<li><p>No results.</p></li>';status.textContent="0 results";return;}
-    var ws=terms(input.value),missing=missingWords(ws);
-    if(missing.length){clearResults();status.textContent=missingMessage(missing);return;}
-    fwApply(ws);
-    if(!ARTS)return;
-    if(cat!=="all"){
-      list.hidden=true;list.innerHTML="";more.hidden=true;resH.hidden=true;
-      var rc=renderConcepts(ws);
-      status.textContent=rc?(ws.length?"Searching "+conH.textContent.split(" — ")[0].toLowerCase()+" only.":"Browsing "+conH.textContent.split(" — ")[0].toLowerCase()+". Type to narrow."):"Could not load the extracted ideas.";
-      return;
-    }
-    if(!ws.length){clearResults();status.textContent="";return;}
-      
-      
-    if(ws.length)renderConcepts(ws);else{conH.hidden=conList.hidden=conMore.hidden=true;}
-    var r=search(ARTS,input.value),shown=showAll?r:r.slice(0,LIMIT);
-    status.textContent=r.length+" of "+ARTS.length+" articles match"+(r.length>shown.length?" (showing "+shown.length+")":"");
-    list.hidden=false;resH.hidden=!ws.length;resH.textContent="Articles — "+r.length;
-    list.innerHTML=shown.length?shown.map(function(x){return '<li><a href="'+esc(x.a.url)+'" target="_blank" rel="noopener">'+esc(x.a.title)+'</a>'+(x.inTitle?'<span class="cvfw-tag">in title</span>':'')+'<p>'+snippet(x.a,ws)+'</p></li>';}).join(""):'<li><p>No linked article contains all of those words.</p></li>';
-    more.hidden=!(r.length>shown.length);more.textContent="Show all "+r.length+" results";
-  }
-  function setCat(k){
-    cat=k;showAllCon=false;
-    Array.prototype.forEach.call(chips.querySelectorAll(".cvfw-chip"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-cat")===k?"true":"false");});
-  }
-  function syncUrl(){
-    try{var u=new URL(location.href),v=input.value.trim();
-      if(v)u.searchParams.set("fwq",v);else u.searchParams.delete("fwq");
-      if(cat!=="all")u.searchParams.set("fwc",cat);else u.searchParams.delete("fwc");
-      if(v||cat!=="all")u.hash="cvfw-search";
-      history.replaceState(null,"",u);}catch(e){}
-  }
-  function schedule(){clearTimeout(timer);timer=setTimeout(function(){render();syncUrl();},120);}
-  input.addEventListener("input",function(){showAll=false;showAllCon=false;if(!missingWords(terms(input.value)).length)load();schedule();});
-  input.addEventListener("keydown",function(e){if(e.key==="Escape"){input.value="";showAll=false;showAllCon=false;render();syncUrl();}});
-  more.addEventListener("click",function(){showAll=true;render();});
-  conMore.addEventListener("click",function(){showAllCon=true;render();});
-  chips.addEventListener("click",function(e){
-    var b=e.target.closest(".cvfw-chip");if(!b)return;
-    setCat(b.getAttribute("data-cat"));
-    if(missingWords(terms(input.value)).length){render();syncUrl();return;}
-    load().then(function(){render();syncUrl();});
-    if(ARTS){render();syncUrl();}
-  });
-  var q0=null,c0=null;try{var sp=new URLSearchParams(location.search);q0=sp.get("fwq");c0=sp.get("fwc");}catch(e){}
-  if(c0&&CATN[c0])setCat(c0);
-  if(q0)input.value=q0;
-  if((q0&&!missingWords(terms(q0)).length)||(c0&&CATN[c0]&&!missingWords(terms(q0||"")).length))load();
-  else if(q0)render();
-})();
-</script>
+        .module-card {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .ai-image-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 0.5rem;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
+            margin-bottom: 1rem;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .ai-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: none; /* Hidden until loaded */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .loader-ui {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(30,41,59,0.8) 0%, rgba(15,23,42,0.95) 100%);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-6 lg:p-8 min-h-screen text-sm">
+
+    <header class="mb-10 border-b border-gray-800 pb-6 relative">
+        <div class="absolute top-0 right-0 flex items-center gap-2 px-3 py-1 bg-gray-800/60 rounded-full border border-gray-700">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+            </span>
+            <span class="text-xs font-mono text-gray-300">Nano Banana AI Active</span>
+        </div>
+        <h1 class="font-display font-800 text-3xl md:text-5xl text-white tracking-tight uppercase leading-tight">Psychological <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Framework</span></h1>
+        <p class="text-gray-400 mt-3 text-xs md:text-sm font-medium tracking-wide uppercase max-w-2xl">Generated dynamically via Gemini 3.1 Flash Image. Every visualization below is uniquely created on load based on specialized prompts distilling the core pipeline logic.</p>
+    </header>
+
+    <!-- Grid Layout -->
+    <main class="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
+
+        <!-- ================= MODULE 1: INTEGRITY ================= -->
+        <article class="module-card border-t-4 border-blue-500">
+            <div class="p-6">
+                <header class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-2xl shrink-0 border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-bold text-xl text-blue-400">MODULE 1</h2>
+                        <h3 class="text-white font-bold text-base tracking-wide">Integrity of Belief & Conduct</h3>
+                    </div>
+                </header>
+
+                <!-- P1: Belief Evaluation -->
+                <div class="mb-8">
+                    <h4 class="text-sm uppercase font-extrabold text-blue-300 mb-2 border-b-2 border-blue-900 pb-2">Pipeline 1: Belief Evaluation</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Test each premise against an impartial standard applied proportionally to all, ensuring that there is alignment between each inference and the empirical evidence.</p>
+                    
+                    <div id="pipeline-1" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-blue-500"></i>
+                            <span class="text-xs text-blue-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-blue-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-1" src="" alt="Belief Evaluation Diagram" class="ai-image" />
+                    </div>
+                </div>
+
+                <!-- P2: Conduct Accountability -->
+                <div>
+                    <h4 class="text-sm uppercase font-extrabold text-blue-300 mb-2 border-b-2 border-blue-900 pb-2">Pipeline 2: Conduct Accountability</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Render to each and all what is due to them (their rights and duties) in proportion to their functional agency. Equity (reasonableness) covers irregular cases so that the ordinance is framed to fit the circumstances.</p>
+                    
+                    <div id="pipeline-2" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-blue-500"></i>
+                            <span class="text-xs text-blue-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-blue-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-2" src="" alt="Conduct Accountability Diagram" class="ai-image" />
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ================= MODULE 2: EMOTION ================= -->
+        <article class="module-card border-t-4 border-purple-500">
+            <div class="p-6">
+                <header class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-2xl shrink-0 border border-purple-500/30 shadow-[0_0_20px_rgba(168,85,247,0.3)]">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-bold text-xl text-purple-400">MODULE 2</h2>
+                        <h3 class="text-white font-bold text-base tracking-wide">Emotional Regulation</h3>
+                    </div>
+                </header>
+
+                <!-- P3: Interoceptive Decentering -->
+                <div class="mb-8">
+                    <h4 class="text-sm uppercase font-extrabold text-purple-300 mb-2 border-b-2 border-purple-900 pb-2">Pipeline 3: Interoceptive Decentering</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Create psychological distance from mental/emotional states by stepping back and observing interoceptive sensations as raw, transient data, helping inhibit automatic impulses. Recognize submissive compliance masquerading as peacekeeping.</p>
+                    
+                    <div id="pipeline-3" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-purple-500"></i>
+                            <span class="text-xs text-purple-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-purple-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-3" src="" alt="Interoceptive Decentering Diagram" class="ai-image" />
+                    </div>
+                </div>
+
+                <!-- P4: Acceptance and Recovery -->
+                <div class="mb-8">
+                    <h4 class="text-sm uppercase font-extrabold text-purple-300 mb-2 border-b-2 border-purple-900 pb-2">Pipeline 4: Acceptance & Recovery</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Let go of invulnerability pretense. Treat planned recovery and rest as essential. The exhaustion stage should not reduce gains; the body should recover and remain above the original baseline.</p>
+                    
+                    <div id="pipeline-4" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-purple-500"></i>
+                            <span class="text-xs text-purple-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-purple-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-4" src="" alt="Acceptance & Recovery Diagram" class="ai-image" />
+                    </div>
+                </div>
+
+                <!-- P5: Stress Triage -->
+                <div>
+                    <h4 class="text-sm uppercase font-extrabold text-purple-300 mb-2 border-b-2 border-purple-900 pb-2">Pipeline 5: Stress Triage</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Under acute pressure, set healthy boundaries to protect personal values. Under mild/moderate pressure, push boundaries using controlled exposure techniques to reframe risk as a manageable challenge. Set goals slightly out of reach.</p>
+                    
+                    <div id="pipeline-5" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-purple-500"></i>
+                            <span class="text-xs text-purple-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-purple-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-5" src="" alt="Stress Triage Diagram" class="ai-image" />
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ================= MODULE 3: SELF-CONCEPT ================= -->
+        <article class="module-card border-t-4 border-orange-500">
+            <div class="p-6">
+                <header class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-2xl shrink-0 border border-orange-500/30 shadow-[0_0_20px_rgba(249,115,22,0.3)]">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-bold text-xl text-orange-400">MODULE 3</h2>
+                        <h3 class="text-white font-bold text-base tracking-wide">Self-Concept</h3>
+                    </div>
+                </header>
+
+                <!-- P6: Self-Worth -->
+                <div class="mb-8">
+                    <h4 class="text-sm uppercase font-extrabold text-orange-300 mb-2 border-b-2 border-orange-900 pb-2">Pipeline 6: Self-Worth</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Dignity rests on moral excellence, honored by integrity. Recognize defensive self-sufficiency as counterdependence. Develop a growth mindset viewing setbacks as skill-deficit feedback rather than personal flaws.</p>
+                    
+                    <div id="pipeline-6" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-orange-500"></i>
+                            <span class="text-xs text-orange-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-orange-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-6" src="" alt="Self-Worth Diagram" class="ai-image" />
+                    </div>
+                </div>
+
+                <!-- P7: Self-Confidence Loop -->
+                <div>
+                    <h4 class="text-sm uppercase font-extrabold text-orange-300 mb-2 border-b-2 border-orange-900 pb-2">Pipeline 7: Self-Confidence Loop</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">A. Internalize deliberate achievements. B. Proportion confidence to actual capability. C. Update confidence with new evidence. D. Use grounded confidence to tackle progressively challenging tasks.</p>
+                    
+                    <div id="pipeline-7" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-orange-500"></i>
+                            <span class="text-xs text-orange-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-orange-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-7" src="" alt="Self-Confidence Cycle Diagram" class="ai-image" />
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ================= MODULE 4: ACTION ================= -->
+        <article class="module-card border-t-4 border-emerald-500">
+            <div class="p-6">
+                <header class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl shrink-0 border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                        <i class="fa-solid fa-person-hiking"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-bold text-xl text-emerald-400">MODULE 4</h2>
+                        <h3 class="text-white font-bold text-base tracking-wide">Sustainable Action</h3>
+                    </div>
+                </header>
+
+                <!-- P8: Simulation Heuristics -->
+                <div class="mb-8">
+                    <h4 class="text-sm uppercase font-extrabold text-emerald-300 mb-2 border-b-2 border-emerald-900 pb-2">Pipeline 8: Simulation Heuristics</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Use 'even if' simulations to separate objective facts from hidden assumptions by testing how different paths change the outcome.</p>
+                    
+                    <div id="pipeline-8" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-emerald-500"></i>
+                            <span class="text-xs text-emerald-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-emerald-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-8" src="" alt="Simulation Heuristics Diagram" class="ai-image" />
+                    </div>
+                </div>
+
+                <!-- P9: Strategic Focus -->
+                <div class="mb-8">
+                    <h4 class="text-sm uppercase font-extrabold text-emerald-300 mb-2 border-b-2 border-emerald-900 pb-2">Pipeline 9: Strategic Focus</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">During cognitive overload, set aside nonessential tasks to refocus on basic needs (sleep/exercise). Avoid the illusion of control and protect yourself from the sunk cost fallacy (past investments are causally irrelevant).</p>
+                    
+                    <div id="pipeline-9" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-emerald-500"></i>
+                            <span class="text-xs text-emerald-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-emerald-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-9" src="" alt="Strategic Focus Diagram" class="ai-image" />
+                    </div>
+                </div>
+
+                <!-- P10: Sustainable Perseverance -->
+                <div>
+                    <h4 class="text-sm uppercase font-extrabold text-emerald-300 mb-2 border-b-2 border-emerald-900 pb-2">Pipeline 10: Sustainable Perseverance</h4>
+                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-medium">Perseverance is sustained by self-compassion. Let purpose (why) motivate methods (what/how). Build resilience through gradual exposure. Use creative hopelessness to give up ineffective approaches for a meaningful life.</p>
+                    
+                    <div id="pipeline-10" class="ai-image-container group">
+                        <div class="loader-ui">
+                            <i class="fa-solid fa-microchip fa-bounce text-3xl text-emerald-500"></i>
+                            <span class="text-xs text-emerald-300 font-mono tracking-wider font-bold">GENERATING DIAGRAM...</span>
+                            <div class="w-32 h-1 bg-gray-700 rounded-full overflow-hidden mt-1"><div class="h-full bg-emerald-500 w-full animate-pulse-slow"></div></div>
+                        </div>
+                        <img id="img-pipeline-10" src="" alt="Sustainable Perseverance Diagram" class="ai-image" />
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <footer class="mt-12 text-center text-gray-600 text-xs border-t border-gray-800 pt-6 font-mono pb-8">
+        &copy; 2026 AI Psychological Framework Dashboard | Dynamic Visualization Engine by Gemini Nano Banana
+    </footer>
+
+    <!-- Script for Dynamic AI Generation -->
+    <script>
+        // API Config
+        const apiKey = ""; // Leave empty for runtime injection
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${apiKey}`;
+        
+        // Define the specific prompt requirements for all 10 pipelines
+        const pipelinesConfig = [
+            {
+                id: 'pipeline-1',
+                prompt: "A modern, flat vector infographic diagram illustrating 'Belief Evaluation'. It shows a 'Premise' node moving through an 'Impartial Standard' filter box, resulting in an 'Inference' that links perfectly to 'Empirical Evidence'. Use a clean UI design style, dark futuristic background, neon blue and white text and accents. Data visualization style."
+            },
+            {
+                id: 'pipeline-2',
+                prompt: "A modern flat vector infographic diagram illustrating a balance scale of 'Conduct Accountability'. The base pedestal is labeled 'Functional Agency'. The left scale pan holds 'Rights', the right scale pan holds 'Duties'. In the absolute center of the balance beam is 'Equity' handling irregular cases. Clean UI design, dark background, neon blue accents. Flowchart style."
+            },
+            {
+                id: 'pipeline-3',
+                prompt: "A modern flat vector flowchart illustrating 'Interoceptive Decentering'. 'Raw Sensations' move through a 'Psychological Distance' process to 'Inhibit Automatic Impulses'. A separate branching path colored red and labeled 'Submissive Compliance' is prominently crossed out. Clean UI design, dark background, neon purple accents."
+            },
+            {
+                id: 'pipeline-4',
+                prompt: "A modern infographic line graph showing 'Acceptance and Recovery'. The line starts at a baseline, dips significantly into an 'Exhaustion' phase, then enters a 'Recovery and Rest' phase, finally stabilizing at a 'New Baseline' that is visibly higher than the original. Include a node for 'Interdependence'. Dark background, bright neon purple and white data visualization design."
+            },
+            {
+                id: 'pipeline-5',
+                prompt: "A modern infographic branching diagram illustrating 'Stress Triage'. A central 'Pressure' node splits. An upper acute path leads to 'Set Boundaries' and 'Protect Values'. A lower mild/moderate path leads to 'Control Exposure' and 'Set Out-of-Reach Goals'. UI flowchart design, dark background, neon purple and glowing accents."
+            },
+            {
+                id: 'pipeline-6',
+                prompt: "An infographic diagram for 'Self-Worth'. 'Moral Excellence' points to 'Human Dignity & Integrity'. A lower parallel path shows a 'Setback' being processed through a 'Growth Mindset' filter to become 'Skill-Deficit Feedback'. A separate node for 'Counterdependence' is marked with an X. Clean modern UI design, dark background, neon orange accents."
+            },
+            {
+                id: 'pipeline-7',
+                prompt: "An infographic cyclical loop diagram illustrating the 'Self-Confidence Cycle' with four distinct steps connecting in a circle: A. Internalize Achievements, B. Proportion to Capability, C. Update with New Evidence, D. Take on Challenge. Clean vector flowchart UI design, dark background, bright neon orange arrows and text boxes."
+            },
+            {
+                id: 'pipeline-8',
+                prompt: "An infographic flowchart showing 'Simulation Heuristics'. 'Objective Facts' and 'Hidden Assumptions' merge and pass through an 'Even If Simulations' filter box, which then splits into three different Divergent Outcomes. Clean, high-tech modern UI design, dark background, neon emerald green accents."
+            },
+            {
+                id: 'pipeline-9',
+                prompt: "An infographic diagram for 'Strategic Focus'. 'Cognitive Overload' leads to 'Set Aside Nonessential' and refocuses on 'Basic Needs (Sleep/Exercise)'. Include two prominent red warning signs attached reading 'Avoid Control Illusion' and 'Avoid Sunk Cost'. Dark background, tech UI style, emerald green main theme with red warnings."
+            },
+            {
+                id: 'pipeline-10',
+                prompt: "An infographic flowchart for 'Sustainable Perseverance'. 'Purpose' drives 'Methods' which is protected by a 'Self-Compassion' shield icon. Below this, a staircase graphic shows 'Gradual Exposure', leading to a node for 'Creative Hopelessness' and finally to a 'Meaningful Life'. Clean vector diagram, dark background, neon emerald green color palette."
+            }
+        ];
+
+        // Fetch with Exponential Backoff
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            let retries = 0;
+            let delay = 1000;
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        // If rate limited (429) or server error, trigger retry
+                        if (response.status === 429 || response.status >= 500) {
+                            retries++;
+                            await new Promise(res => setTimeout(res, delay));
+                            delay *= 2; // Exponential increase
+                            continue;
+                        }
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (e) {
+                    if (retries >= maxRetries - 1) throw e;
+                    retries++;
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        // Gemini 3.1 Flash Image Generation Call
+        async function generatePipelineImage(prompt) {
+            const payload = {
+                contents: [{
+                    role: 'user',
+                    parts: [{ text: prompt }]
+                }],
+                generationConfig: {
+                    responseModalities: ['IMAGE'],
+                    imageConfig: { aspectRatio: "16:9" } // Wide to fit UI perfectly
+                }
+            };
+
+            const result = await fetchWithRetry(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+            if (part && part.inlineData && part.inlineData.data) {
+                return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+            }
+            throw new Error("Invalid response structure or missing image data from AI.");
+        }
+
+        // Process a single pipeline container
+        async function processPipeline(config) {
+            const container = document.getElementById(config.id);
+            const imgEl = document.getElementById(`img-${config.id}`);
+            const loaderUi = container.querySelector('.loader-ui');
+
+            try {
+                const base64Image = await generatePipelineImage(config.prompt);
+                
+                // On Success, update image and hide loader
+                imgEl.src = base64Image;
+                imgEl.onload = () => {
+                    loaderUi.style.display = 'none';
+                    imgEl.style.display = 'block';
+                    // Trigger fade in
+                    setTimeout(() => { imgEl.style.opacity = '1'; }, 50);
+                };
+            } catch (error) {
+                console.error(`Failed to generate image for ${config.id}:`, error);
+                // Fallback state on total failure
+                loaderUi.innerHTML = `
+                    <i class="fa-solid fa-triangle-exclamation text-red-500 text-3xl"></i>
+                    <span class="text-xs text-red-400 font-mono text-center px-4">Generation failed after multiple retries. Please refresh.</span>
+                `;
+            }
+        }
+
+        // Initialize Generation on Load
+        window.onload = () => {
+            // We fire them all off concurrently. The exponential backoff will handle
+            // the 429 rate limiting gracefully by staggering the retries under the hood.
+            pipelinesConfig.forEach(config => {
+                // Ensure initial style setup
+                const imgEl = document.getElementById(`img-${config.id}`);
+                imgEl.style.opacity = '0';
+                
+                // Start generation
+                processPipeline(config);
+            });
+        };
+    </script>
 </body>
 </html>
